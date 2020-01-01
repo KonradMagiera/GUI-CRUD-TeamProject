@@ -1,27 +1,39 @@
 import React from 'react';
 import 'firebase/auth';
 import Firebase from '../../firebaseConfig';
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom';
+import { login } from '../../actions/authentication'
 
+
+const mapStateToProps = ({ authenticationReducer }) => ({
+    isAuthenticated: authenticationReducer
+})
+
+const mapDispatchToProps = dispatch => ({
+    login: isAuthenticated => dispatch(login(isAuthenticated))
+})
 
 
 class Login extends React.Component {
-
     async handleLogin(e) {
         e.preventDefault()
         const  email = e.target.email.value
         const password = e.target.password.value
-
-        var msg = ""
+        var isAuth
         await Firebase.auth()
             .signInWithEmailAndPassword(email, password)
-            .then(() => msg = "")
-            .catch(error => msg = error.message)
+            .then(() => isAuth = true)
+            .catch(() => isAuth = false)
 
-        // TODO redirect to PrivateRoute pages; move Firebase.auth to Redux action
-        console.log(msg === "" ? "true" : msg)
+        this.props.login(isAuth)
+
     }
 
     render() {
+        if(this.props.isAuthenticated){
+            return <Redirect to="/home" />
+        }
         return (
             <form onSubmit={e => this.handleLogin(e)}>
                 <input type="text" name="email" placeholder="email"/>
@@ -34,5 +46,4 @@ class Login extends React.Component {
     }
 }
 
-
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

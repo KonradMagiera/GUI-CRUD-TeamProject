@@ -1,5 +1,5 @@
 import React from 'react';
-import  Login  from "./layout/Login"
+import  { Login, Home, PrivateRoute }  from "./index"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
@@ -8,6 +8,7 @@ function App()  {
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
+        <PrivateRoute path="/home" component={Home}/>
       </Switch>
     </Router>
   )
