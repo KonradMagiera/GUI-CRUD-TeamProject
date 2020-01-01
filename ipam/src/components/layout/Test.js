@@ -8,9 +8,9 @@ const mapStateToProps = ({ testReducer }) => ({
 
 const mapDispatchToProps = dispatch => ({
     sendMsg: message => dispatch(sendMessage(message))
-  })
+})
 
-export const Header = (props) => {
+export const Test = (props) => {
     props.sendMsg("Zmiana")
     return (
         <header >
@@ -19,4 +19,4 @@ export const Header = (props) => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Test)

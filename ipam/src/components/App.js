@@ -1,10 +1,17 @@
 import React from 'react';
-import  Header  from "./layout/Header"
+import  Login  from "./layout/Login"
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
+
+function App()  {
   return (
-      <Header />
-  );
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+      </Switch>
+    </Router>
+  )
 }
+
 
 export default App;
