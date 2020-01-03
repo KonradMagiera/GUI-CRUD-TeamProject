@@ -24,6 +24,9 @@ function Home(props)  {
         <Link to="/" onClick={() => { db() }}>Link without logout</Link>
         </div>
         <div>
+          <Link to="/register_subnet">Register subnet</Link>
+        </div>
+        <div>
         <Link to="/" onClick={() => { props.logout(false) }} >
           Logout
         </Link>
