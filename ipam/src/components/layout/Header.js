@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link  } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../../actions/authentication'
 
@@ -11,13 +11,13 @@ function Header(props) {
       <nav className="top-bar-links">
         <Link to="/">
           <button onClick={() => { props.logout(false) }}>Logout</button>
-        </Link> 
+        </Link>
         <Link to="/home">
           <button>Home</button>
         </Link>
 
-        <Link to="/register_subnet">
-        <button>Register subnet</button>
+        <Link to="/subnet">
+          <button>Subnet</button>
         </Link>
       </nav>
     </header>

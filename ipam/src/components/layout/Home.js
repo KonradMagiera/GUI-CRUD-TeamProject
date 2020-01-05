@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../../actions/authentication'
 
-function Home(props)  {
+function Home(props) {
   return (
     <div>
-        <label>Home Page</label>
-        <div>
-          <Link to="/register_subnet">Register subnet</Link>
-        </div>
+      <label>Home Page</label>
+      <div>
+        <Link to="/register_subnet">Register subnet</Link>
+      </div>
     </div>
   )
 }
