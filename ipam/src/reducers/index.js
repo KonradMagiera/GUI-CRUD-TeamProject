@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import { testReducer, authenticationReducer } from './reducers'
+import {  authenticationReducer } from './reducers'
 
-export default combineReducers({ testReducer, authenticationReducer })
+export default combineReducers({  authenticationReducer })
