@@ -5,7 +5,7 @@ import Firebase from '../../../firebaseConfig';
 class Subnet extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { datax: <tr></tr> }
+    this.state = { datax: <tr></tr> }  
   }
 
   componentDidMount(){
