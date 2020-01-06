@@ -1,8 +1,8 @@
 import React from 'react';
 import Firebase from '../../../firebaseConfig';
 
-class RegisterSubnet extends React.Component {
-  constructor(props) {
+class RegisterSubnet extends React.Component {  // jak bedzie w reduxie to po kazdej akcji ( update/add )trzeba wyczyscic this.state
+  constructor(props) {                          // jezeli chcemy update to uzupelniamy w reduxie this.state danymi dla subnetu i podajemy jego klucz; update; wyczysc state
     super(props);
     this.state = {
       subnet_key: "",       // if subnet_key === "" => registerSubnet; if subnet_key === "{ item_id }" updateSubnet

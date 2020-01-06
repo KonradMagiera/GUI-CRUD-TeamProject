@@ -3,31 +3,18 @@ import 'firebase/auth';
 import Firebase from '../../firebaseConfig';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { login } from '../../actions/authentication'
-
-
-const mapStateToProps = ({ authenticationReducer }) => ({
-  isAuthenticated: authenticationReducer
-})
-
-const mapDispatchToProps = dispatch => ({
-  login: isAuthenticated => dispatch(login(isAuthenticated))
-})
+import { login } from '../../actions'
 
 
 class Login extends React.Component {
-  async handleLogin(e) {
+  handleLogin(e) {
     e.preventDefault()
     const email = e.target.email.value
     const password = e.target.password.value
-    var isAuth
-    await Firebase.auth()
+    Firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => isAuth = true)
-      .catch(() => isAuth = false)
-
-    this.props.login(isAuth)
-
+      .then(() => this.props.login(true))
+      .catch(() => this.props.login(false))
   }
 
   render() {
@@ -46,4 +33,8 @@ class Login extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+const mapStateToProps = ({ authenticationReducer }) => ({
+  isAuthenticated: authenticationReducer
+})
+
+export default connect(mapStateToProps, { login })(Login)

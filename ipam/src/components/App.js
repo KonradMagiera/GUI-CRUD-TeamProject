@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login, Home, RegisterSubnet, PrivateRoute, Header, Subnet } from "./index"
+import { Login, Home, SubnetForm, PrivateRoute, Header, Subnet } from "./index"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
@@ -11,7 +11,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/subnet" component={Subnet} />
-        <PrivateRoute path="/register_subnet" component={RegisterSubnet} />
+        <PrivateRoute path="/register_subnet" component={SubnetForm} />
       </Switch>
     </Router>
   )
