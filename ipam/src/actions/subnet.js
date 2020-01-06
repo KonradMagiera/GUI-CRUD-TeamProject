@@ -1,8 +1,16 @@
 export const SET_SUBNET = "SET_SUBNET"
+export const RESET_SUBNET = "RESET_SUBNET"
 
-export const setSubnet = subnet => dispatch => {
+export const setSubnet = (name, value) => dispatch => {
     dispatch({
         type: SET_SUBNET,
-        subnet
+        name,
+        value
+    })
+}
+
+export const resetSubnet = () => dispatch => {
+    dispatch({
+        type: RESET_SUBNET
     })
 }

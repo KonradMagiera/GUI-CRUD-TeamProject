@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import { authenticationReducer } from './reducers'
+import { authenticationReducer, subnetReducer } from './reducers'
 
-export default combineReducers({ authenticationReducer })
+export default combineReducers({ authenticationReducer, subnetReducer })
