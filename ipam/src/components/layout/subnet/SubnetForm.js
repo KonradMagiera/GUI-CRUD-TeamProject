@@ -1,6 +1,6 @@
 import React from 'react';
 import Firebase from '../../../firebaseConfig';
-import { setSubnet, resetSubnet } from '../../../actions'
+import { setSubnetItem, resetSubnet } from '../../../actions'
 import { connect } from 'react-redux'
 
 class RegisterSubnet extends React.Component {
@@ -20,6 +20,7 @@ class RegisterSubnet extends React.Component {
         "description": this.props.subnet.description
       }) 
     } else {
+      console.log(this.props.subnet)
       // call Firebase update on subnet_key
     }
     this.props.resetSubnet()
@@ -29,15 +30,15 @@ class RegisterSubnet extends React.Component {
   handleChange = e => {
     const { name, value, type, checked } = e.target
     type === "checkbox"
-    ? this.props.setSubnet(name, checked)
-    : this.props.setSubnet(name, value)
+    ? this.props.setSubnetItem(name, checked)
+    : this.props.setSubnetItem(name, value)
   }
 
   render() {
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
         <div>
-          <h2>Register subnet</h2>
+          <h2>{this.props.subnet.subnet_key === "" ? "Register subnet" : "Edit subnet"}</h2>
         </div>
         <div>
           <label htmlFor="ip_address">IP address</label>
@@ -93,7 +94,7 @@ class RegisterSubnet extends React.Component {
           <textarea name="description" value={this.props.subnet.description} placeholder="description" onChange={e => this.handleChange(e)} />
         </div>
         <div>
-          <button>Register</button>
+          <button>{this.props.subnet.subnet_key === "" ? "Register" : "Update"}</button>
         </div>
       </form>
     )
@@ -104,4 +105,4 @@ const mapStateToProps = ({ subnetReducer }) => ({
   subnet: subnetReducer
 })
 
-export default connect(mapStateToProps, { setSubnet, resetSubnet })(RegisterSubnet)
+export default connect(mapStateToProps, { setSubnetItem, resetSubnet })(RegisterSubnet)

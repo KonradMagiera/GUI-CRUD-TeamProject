@@ -1,15 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../../actions/authentication'
 
 function Home(props) {
   return (
     <div>
-      <label>Home Page</label>
-      <div>
-        <Link to="/register_subnet">Register subnet</Link>
-      </div>
+      <label>Home Page / mozna przygotowac jakis komponent prezentujacy nasz porjekcik</label>
     </div>
   )
 }

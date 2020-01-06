@@ -1,4 +1,4 @@
 import { login } from "./authentication"
-import { setSubnet, resetSubnet } from "./subnet"
+import { setSubnetItem, resetSubnet, setSubnet } from "./subnet"
 
-export { login, setSubnet, resetSubnet }
+export { login, setSubnetItem, resetSubnet, setSubnet }

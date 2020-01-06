@@ -12,6 +12,7 @@ function App() {
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/subnet" component={Subnet} />
         <PrivateRoute path="/register_subnet" component={SubnetForm} />
+        <PrivateRoute path="/edit_subnet" component={SubnetForm} />
       </Switch>
     </Router>
   )

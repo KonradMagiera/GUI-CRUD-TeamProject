@@ -1,5 +1,5 @@
 import { LOG_IN } from '../actions/authentication'
-import { SET_SUBNET, RESET_SUBNET } from "../actions/subnet"
+import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET } from "../actions/subnet"
 
 
 const initialAuth = false
@@ -28,10 +28,12 @@ const initialSubnet = {
   description: ""
 }
 
-export function subnetReducer(state = initialSubnet, { type, name, value }) {
+export function subnetReducer(state = initialSubnet, { type, name, value, subnet }) {
   Object.freeze(state)
   switch (type) {
     case SET_SUBNET:
+      return subnet
+    case SET_SUBNET_ITEM:
       return ({
         ...state,
         [name]: value})
