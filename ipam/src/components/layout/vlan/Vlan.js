@@ -28,11 +28,17 @@ class Vlan extends React.Component {
     var vlanItems = null
     if (this.props.allVlans !== null) {
       vlanItems = Object.keys(this.props.allVlans).map(key => {
+        var vlanSubnets = null;
+        if(this.props.allVlans[key].subnets !== undefined) {
+            vlanSubnets = Object.keys(this.props.allVlans[key].subnets).map(subnetKey => {
+            return (<div key={subnetKey}>{this.props.allVlans[key].subnets[subnetKey]}</div>)
+            })
+        } 
         return (
           <tr key={key}>
             <th>{this.props.allVlans[key].id_vlan}</th>
             <th>{this.props.allVlans[key].description}</th>
-            <th>{this.props.allVlans[key].subnets}</th>
+            <th>{vlanSubnets}</th>
             <th><Link to="/edit_vlan" onClick={() => {
               this.props.setVlan({
                 vlan_key: key,

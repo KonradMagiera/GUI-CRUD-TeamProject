@@ -1,9 +1,27 @@
 import React from 'react';
 import Firebase from '../../../firebaseConfig';
-import { setVlanItem, resetVlan } from '../../../actions'
+import { setVlanItem, resetVlan, addVlanSubnet } from '../../../actions'
+import { addSubnetInfo, resetSubnet } from '../../../actions'
 import { connect } from 'react-redux'
 
 class VlanForm extends React.Component {
+  componentDidMount() {
+    this.fetchSubnets()
+  }
+
+  fetchSubnets = () => {
+    Firebase.database().ref("/subnets").once("value", data => {
+      var subnets = data.val()
+      if (subnets !== null) {
+        Object.keys(subnets).map(key => {
+          return this.props.addSubnetInfo(key, subnets[key])
+        })
+      } else {
+        return subnets
+      }
+
+    })
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -28,44 +46,68 @@ class VlanForm extends React.Component {
   }
 
   handleChange = e => {
-    const { name, value } = e.target
-    this.props.setVlanItem(name, value)
+    if (e.target.name === "subnets") {
+      var index = e.nativeEvent.target.selectedIndex; 
+      var subnet_key = e.target.options[index].getAttribute('subnet_key')
+      var subnet_ip_address = e.target.value
+      this.props.addVlanSubnet(subnet_key, subnet_ip_address)
+      document.getElementById("chosen_subnets").textContent += subnet_ip_address + '\n' //chwilowo zrobione tak żeby zobaczyć jakie subnety sa dodawane
+    } else {
+      const { name, value } = e.target
+      this.props.setVlanItem(name, value)
+    }
   }
 
-    render() {  // Subnets musza być chyba wybierane z tych zarejestrowanych
-        return(
-            <form onSubmit={(e) => this.handleSubmit(e)}>
-            <div>
-              <h2>{this.props.vlan.vlan_key === "" ? "Register VLAN" : "Edit VLAN"}</h2>
-            </div>
-            <div>
-              <label htmlFor="id_vlan">ID VLAN</label>
-            </div>
-            <div>
-              <input type="text" name="id_vlan" value={this.props.vlan.id_vlan} placeholder="id_vlan" onChange={e => this.handleChange(e)} />
-            </div>
-            <div>
-              <label htmlFor="description">Description</label>
-            </div>
-            <div>
-              <textarea name="description" value={this.props.vlan.description} placeholder="description" onChange={e => this.handleChange(e)} />
-            </div>
-            <div>
-              <label htmlFor="subnets">Subnets</label>
-            </div>
-            <div>
-              <input type="text" name="subnets" value={this.props.vlan.subnets} placeholder="subnets" onChange={e => this.handleChange(e)} />
-            </div>
-            <div>
-              <button>{this.props.vlan.vlan_key === "" ? "Register" : "Update"}</button>
-            </div>
-          </form>
-        )
-    }
+  render() {  // Subnets musza być chyba wybierane z tych zarejestrowanych    
+      this.props.resetSubnet() 
+      var subnetItems = null
+      if (this.props.allSubnets !== null) { // nie mogłam wydobyć atrybutu key z option więc dodałam subnet_key
+        subnetItems = Object.keys(this.props.allSubnets).map(key => {
+          return (
+              <option value={this.props.allSubnets[key].ip_address} key={key} subnet_key={key}>
+                {this.props.allSubnets[key].ip_address}
+              </option>
+          )
+        })
+      }
+
+      return(
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+          <div>
+            <h2>{this.props.vlan.vlan_key === "" ? "Register VLAN" : "Edit VLAN"}</h2>
+          </div>
+          <div>
+            <label htmlFor="id_vlan">ID VLAN</label>
+          </div>
+          <div>
+            <input type="text" name="id_vlan" value={this.props.vlan.id_vlan} placeholder="id_vlan" onChange={e => this.handleChange(e)} />
+          </div>
+          <div>
+            <label htmlFor="description">Description</label>
+          </div>
+          <div>
+            <textarea name="description" value={this.props.vlan.description} placeholder="description" onChange={e => this.handleChange(e)} />
+          </div>
+          <div>
+            <label htmlFor="subnets">Subnets</label>
+          </div>
+          <div>
+            <select name="subnets" onChange={e => this.handleChange(e)}>
+              {subnetItems}
+            </select>
+            <textarea id="chosen_subnets"/>
+          </div>
+          <div>
+            <button>{this.props.vlan.vlan_key === "" ? "Register" : "Update"}</button>
+          </div>
+        </form>
+      )
+  }
 }
 
-const mapStateToProps = ({ vlanReducer }) => ({
-  vlan: vlanReducer
+const mapStateToProps = ({ vlanReducer, allSubnetsReducer }) => ({
+  vlan: vlanReducer,
+  allSubnets: allSubnetsReducer
 })
 
-export default connect(mapStateToProps, { setVlanItem, resetVlan })(VlanForm)
+export default connect(mapStateToProps, { setVlanItem, resetVlan, addSubnetInfo, resetSubnet, addVlanSubnet })(VlanForm)
