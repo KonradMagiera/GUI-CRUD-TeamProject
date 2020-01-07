@@ -21,6 +21,10 @@ function Header(props) {
         <Link to="/subnet">
           <button>Subnet</button>
         </Link>
+
+        <Link to="/vlan">
+          <button>VLAN</button>
+        </Link>
       </nav>
     </header>
   )

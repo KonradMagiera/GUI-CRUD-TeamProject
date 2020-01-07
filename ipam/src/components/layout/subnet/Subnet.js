@@ -23,7 +23,6 @@ class Subnet extends React.Component {
     })
   }
 
-
   render() {
     this.props.resetSubnet() // reset subnet store
     var subnetItems = null
