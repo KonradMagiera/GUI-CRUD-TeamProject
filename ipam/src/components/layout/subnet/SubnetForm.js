@@ -7,9 +7,8 @@ class RegisterSubnet extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.props.subnet.subnet_key === "") {
-      Firebase.database().ref('/subnets').push({
-        "ip_address": this.props.subnet.ip_address,
+    var subnetTmp = {
+      "ip_address": this.props.subnet.ip_address,
         "netmask": this.props.subnet.netmask,
         "vlan": this.props.subnet.vlan,
         "nameservers": this.props.subnet.nameservers,
@@ -18,10 +17,17 @@ class RegisterSubnet extends React.Component {
         "public_or_dmz": this.props.subnet.public_or_dmz,
         "ip_assignment": this.props.subnet.ip_assignment,
         "description": this.props.subnet.description
-      }) 
+    }
+    if (this.props.subnet.subnet_key === "") {
+      Firebase.database().ref('/subnets').push(subnetTmp) 
     } else {
-      console.log(this.props.subnet)
-      // call Firebase update on subnet_key
+      Firebase.database().ref('/subnets').child(this.props.subnet.subnet_key)
+      .update(subnetTmp).then(() => {
+        return {}}).catch(error => {
+          return {
+            errorCode: error.code,
+            errorMessage: error.message
+          }})
     }
     this.props.resetSubnet()
     this.props.history.push("/subnet"); // redirect after success
