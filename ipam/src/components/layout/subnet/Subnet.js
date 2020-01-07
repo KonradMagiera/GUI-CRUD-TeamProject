@@ -22,7 +22,7 @@ class Subnet extends React.Component {
   render() {
     this.props.resetSubnet() // reset subnet store
     var tmp = this.props.allSubnets
-    var datax = Object.keys(tmp).map(key => {
+    var tableitems = Object.keys(tmp).map(key => {
       return (
         <tr key={key}>
           <th>{tmp[key].ip_address}</th>
@@ -48,7 +48,8 @@ class Subnet extends React.Component {
               description: tmp[key].description
             })
 
-          }}>Edit</Link></th>
+          }}>Edit</Link>
+          <button onClick={() => {Firebase.database().ref(`/subnets/${key}`).remove()}}>Delete</button></th>
         </tr>
       )
     })
@@ -71,7 +72,7 @@ class Subnet extends React.Component {
               <th>Description</th>
               <th>Actions</th>
             </tr>
-            {datax}
+            {tableitems}
           </tbody>
         </table>
       </div>
