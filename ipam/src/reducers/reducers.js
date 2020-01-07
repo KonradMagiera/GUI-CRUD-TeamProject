@@ -1,5 +1,5 @@
 import { LOG_IN } from '../actions/authentication'
-import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO } from "../actions/subnet"
+import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO, DELETE_SUBNET_INFO } from "../actions/subnet"
 
 
 const initialAuth = false
@@ -44,19 +44,20 @@ export function subnetReducer(state = initialSubnet, { type, name, value, subnet
   }
 }
 
-const initialAllSubnets = {
-    
-}
+const initialAllSubnets = null
 
 export function allSubnetsReducer(state = initialAllSubnets, {type, subnetKey, subnetInfo}) {
-  Object.freeze(state)
+  //Object.freeze(state)
   switch(type) {
+    case DELETE_SUBNET_INFO:
+      var newState = state
+      delete newState[subnetKey]
+      return newState
     case ADD_SUBNET_INFO:
       return ({
       ...state,
       [subnetKey]: subnetInfo
     })
-    
     default:
       return state
   }

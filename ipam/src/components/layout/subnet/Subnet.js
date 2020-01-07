@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Firebase from '../../../firebaseConfig';
-import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo } from '../../../actions'
+import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo } from '../../../actions'
 import { connect } from 'react-redux'
 
 class Subnet extends React.Component {
@@ -11,13 +11,13 @@ class Subnet extends React.Component {
 
   fetchSubnets = () => {
     Firebase.database().ref("/subnets").once("value", data => {
-      var tmp = data.val()
-      if (tmp !== null) {
-        Object.keys(tmp).map(key => {
-          return this.props.addSubnetInfo(key, tmp[key])
+      var subnets = data.val()
+      if (subnets !== null) {
+        Object.keys(subnets).map(key => {
+          return this.props.addSubnetInfo(key, subnets[key])
         })
       } else {
-        return tmp
+        return subnets
       }
 
     })
@@ -26,36 +26,36 @@ class Subnet extends React.Component {
 
   render() {
     this.props.resetSubnet() // reset subnet store
-    var tmp = this.props.allSubnets
-    if (tmp !== null) {
-      tmp = Object.keys(tmp).map(key => {
+    var subnetItems = null
+    if (this.props.allSubnets !== null) {
+      subnetItems = Object.keys(this.props.allSubnets).map(key => {
         return (
           <tr key={key}>
-            <th>{tmp[key].ip_address}</th>
-            <th>{tmp[key].netmask}</th>
-            <th>{tmp[key].ip_assignment}</th>
-            <th>{tmp[key].is_routable ? "Yes" : "No"}</th>
-            <th>{tmp[key].location}</th>
-            <th>{tmp[key].nameservers}</th>
-            <th>{tmp[key].public_or_dmz}</th>
-            <th>{tmp[key].vlan}</th>
-            <th>{tmp[key].description}</th>
+            <th>{this.props.allSubnets[key].ip_address}</th>
+            <th>{this.props.allSubnets[key].netmask}</th>
+            <th>{this.props.allSubnets[key].ip_assignment}</th>
+            <th>{this.props.allSubnets[key].is_routable ? "Yes" : "No"}</th>
+            <th>{this.props.allSubnets[key].location}</th>
+            <th>{this.props.allSubnets[key].nameservers}</th>
+            <th>{this.props.allSubnets[key].public_or_dmz}</th>
+            <th>{this.props.allSubnets[key].vlan}</th>
+            <th>{this.props.allSubnets[key].description}</th>
             <th><Link to="/edit_subnet" onClick={() => {
               this.props.setSubnet({
                 subnet_key: key,
-                ip_address: tmp[key].ip_address,
-                netmask: tmp[key].netmask,
-                vlan: tmp[key].vlan,
-                nameservers: tmp[key].nameservers,
-                location: tmp[key].location,
-                routable: tmp[key].is_routable,
-                public_or_dmz: tmp[key].public_or_dmz,
-                ip_assignment: tmp[key].ip_assignment,
-                description: tmp[key].description
+                ip_address: this.props.allSubnets[key].ip_address,
+                netmask: this.props.allSubnets[key].netmask,
+                vlan: this.props.allSubnets[key].vlan,
+                nameservers: this.props.allSubnets[key].nameservers,
+                location: this.props.allSubnets[key].location,
+                routable: this.props.allSubnets[key].is_routable,
+                public_or_dmz: this.props.allSubnets[key].public_or_dmz,
+                ip_assignment: this.props.allSubnets[key].ip_assignment,
+                description: this.props.allSubnets[key].description
               })
 
             }}>Edit</Link>
-              <button onClick={() => { Firebase.database().ref(`/subnets/${key}`).remove(); this.fetchSubnets() }}>Delete</button></th>
+              <button onClick={() => { Firebase.database().ref(`/subnets/${key}`).remove(); this.props.deleteSubnetInfo(key); this.forceUpdate() }}>Delete</button></th>
           </tr>
         )
       })
@@ -78,7 +78,7 @@ class Subnet extends React.Component {
               <th>Description</th>
               <th>Actions</th>
             </tr>
-            {tmp}
+            {subnetItems}
           </tbody>
         </table>
       </div>
@@ -90,4 +90,4 @@ const mapStateToProps = ({ allSubnetsReducer }) => ({
   allSubnets: allSubnetsReducer
 })
 
-export default connect(mapStateToProps, { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo })(Subnet)
+export default connect(mapStateToProps, { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo })(Subnet)
