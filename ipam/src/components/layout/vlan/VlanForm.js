@@ -46,10 +46,9 @@ class VlanForm extends React.Component {
   }
 
   handleChange = e => {
-    if (e.target.name === "subnets") {
-      var index = e.nativeEvent.target.selectedIndex; 
-      var subnet_key = e.target.options[index].getAttribute('subnet_key')
-      var subnet_ip_address = e.target.value
+    if (e.target.name === "subnets" && e.target.value !== "") {
+      var subnet_key = e.target.value
+      var subnet_ip_address = this.props.allSubnets[subnet_key].ip_address
       this.props.addVlanSubnet(subnet_key, subnet_ip_address)
       document.getElementById("chosen_subnets").textContent += subnet_ip_address + '\n' //chwilowo zrobione tak żeby zobaczyć jakie subnety sa dodawane
     } else {
@@ -61,10 +60,10 @@ class VlanForm extends React.Component {
   render() {  // Subnets musza być chyba wybierane z tych zarejestrowanych    
       this.props.resetSubnet() 
       var subnetItems = null
-      if (this.props.allSubnets !== null) { // nie mogłam wydobyć atrybutu key z option więc dodałam subnet_key
+      if (this.props.allSubnets !== null) {
         subnetItems = Object.keys(this.props.allSubnets).map(key => {
           return (
-              <option value={this.props.allSubnets[key].ip_address} key={key} subnet_key={key}>
+              <option value={key} key={key}> 
                 {this.props.allSubnets[key].ip_address}
               </option>
           )
@@ -92,7 +91,8 @@ class VlanForm extends React.Component {
             <label htmlFor="subnets">Subnets</label>
           </div>
           <div>
-            <select name="subnets" onChange={e => this.handleChange(e)}>
+            <select name="subnets" value="" onChange={e => this.handleChange(e)}>
+              <option value="">--Subnet--</option>
               {subnetItems}
             </select>
             <textarea id="chosen_subnets"/>
