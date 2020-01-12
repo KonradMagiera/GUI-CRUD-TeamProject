@@ -3,7 +3,7 @@ import Firebase from '../../../firebaseConfig';
 import { setSubnetItem, resetSubnet } from '../../../actions'
 import { connect } from 'react-redux'
 
-class RegisterSubnet extends React.Component {
+class SubnetForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
@@ -111,4 +111,4 @@ const mapStateToProps = ({ subnetReducer }) => ({
   subnet: subnetReducer
 })
 
-export default connect(mapStateToProps, { setSubnetItem, resetSubnet })(RegisterSubnet)
+export default connect(mapStateToProps, { setSubnetItem, resetSubnet })(SubnetForm)
