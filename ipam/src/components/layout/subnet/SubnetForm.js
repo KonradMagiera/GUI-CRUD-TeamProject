@@ -9,35 +9,37 @@ class SubnetForm extends React.Component {
     e.preventDefault();
     var subnetTmp = {
       "ip_address": this.props.subnet.ip_address,
-        "netmask": this.props.subnet.netmask,
-        "vlan": this.props.subnet.vlan,
-        "nameservers": this.props.subnet.nameservers,
-        "location": this.props.subnet.location,
-        "is_routable": this.props.subnet.routable,
-        "public_or_dmz": this.props.subnet.public_or_dmz,
-        "ip_assignment": this.props.subnet.ip_assignment,
-        "description": this.props.subnet.description
+      "netmask": this.props.subnet.netmask,
+      "vlan": this.props.subnet.vlan,
+      "nameservers": this.props.subnet.nameservers,
+      "location": this.props.subnet.location,
+      "is_routable": this.props.subnet.routable,
+      "public_or_dmz": this.props.subnet.public_or_dmz,
+      "ip_assignment": this.props.subnet.ip_assignment,
+      "description": this.props.subnet.description
     }
     if (this.props.subnet.subnet_key === "") {
-      Firebase.database().ref('/subnets').push(subnetTmp) 
+      Firebase.database().ref('/subnets').push(subnetTmp)
     } else {
       Firebase.database().ref('/subnets').child(this.props.subnet.subnet_key)
-      .update(subnetTmp).then(() => {
-        return {}}).catch(error => {
+        .update(subnetTmp).then(() => {
+          return {}
+        }).catch(error => {
           return {
             errorCode: error.code,
             errorMessage: error.message
-          }})
+          }
+        })
     }
     this.props.resetSubnet()
-    this.props.history.push("/subnet"); // redirect after success
+    this.props.history.push("/subnet");
   }
 
   handleChange = e => {
     const { name, value, type, checked } = e.target
     type === "checkbox"
-    ? this.props.setSubnetItem(name, checked)
-    : this.props.setSubnetItem(name, value)
+      ? this.props.setSubnetItem(name, checked)
+      : this.props.setSubnetItem(name, value)
   }
 
   render() {

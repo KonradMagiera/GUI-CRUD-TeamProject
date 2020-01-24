@@ -25,7 +25,7 @@ class LocationForm extends React.Component {
         })
     }
     this.props.resetLocation()
-    this.props.history.push("/location"); // redirect after success
+    this.props.history.push("/location");
   }
 
   handleChange = e => {

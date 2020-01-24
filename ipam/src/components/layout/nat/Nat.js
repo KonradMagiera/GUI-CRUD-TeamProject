@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Firebase from '../../../firebaseConfig';
-import { setNat, setNatItem, resetNat, addNatInfo, deleteNatInfo, fetchItems } from '../../../actions'
+import { setNat, setNatItem, resetNat, addNatInfo, deleteNatInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
 
@@ -11,7 +10,7 @@ class Nat extends React.Component {
   }
 
   render() {
-    this.props.resetNat() // reset subnet store
+    this.props.resetNat()
     var natItems = null
     if (this.props.allNats !== null) {
       natItems = Object.keys(this.props.allNats).map(key => {
@@ -33,7 +32,7 @@ class Nat extends React.Component {
               })
 
             }}>Edit</Link>
-              <button onClick={() => { Firebase.database().ref(`/nats/${key}`).remove(); this.props.deleteNatInfo(key); this.forceUpdate() }}>Delete</button></th>
+              <button onClick={() => { deleteItem(this.props.allNats[key].name, "nats", key, this.props.deleteNatInfo); this.forceUpdate() }}>Delete</button></th>
           </tr>
         )
       })

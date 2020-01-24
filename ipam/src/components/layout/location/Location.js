@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Firebase from '../../../firebaseConfig';
-import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo, fetchItems } from '../../../actions'
+import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
 
@@ -29,7 +28,7 @@ class Location extends React.Component {
               })
 
             }}>Edit</Link>
-              <button onClick={() => { Firebase.database().ref(`/locations/${key}`).remove(); this.props.deleteLocationInfo(key); this.forceUpdate() }}>Delete</button></th>
+              <button onClick={() => { deleteItem(this.props.allLocations[key].location, "locations", key, this.props.deleteLocationInfo); this.forceUpdate() }}>Delete</button></th>
           </tr>
         )
       })

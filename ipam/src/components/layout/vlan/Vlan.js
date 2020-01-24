@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Firebase from '../../../firebaseConfig';
-import { addVlanInfo, resetVlan, setVlan, deleteVlanInfo, fetchItems } from '../../../actions'
+import { addVlanInfo, resetVlan, setVlan, deleteVlanInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
 
@@ -13,6 +12,7 @@ class Vlan extends React.Component {
   render() {
     this.props.resetVlan()
     var vlanItems = null
+
     if (this.props.allVlans !== null) {
       vlanItems = Object.keys(this.props.allVlans).map(key => {
         var vlanSubnets = null;
@@ -35,11 +35,15 @@ class Vlan extends React.Component {
               })
 
             }}>Edit</Link>
-              <button onClick={() => { Firebase.database().ref(`/vlans/${key}`).remove(); this.props.deleteVlanInfo(key); this.forceUpdate() }}>Delete</button></th>
+              <button onClick={() => {
+                deleteItem(this.props.allVlans[key].id_vlan, "vlans", key, this.props.deleteVlanInfo)
+                this.forceUpdate()
+              }}>Delete</button></th>
           </tr>
         )
       })
     }
+
     return (
       <div>
         <label>VLAN</label>

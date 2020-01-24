@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Firebase from '../../../firebaseConfig';
-import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo, fetchItems } from '../../../actions'
+import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
 
@@ -11,7 +10,7 @@ class Subnet extends React.Component {
   }
 
   render() {
-    this.props.resetSubnet() // reset subnet store
+    this.props.resetSubnet()
     var subnetItems = null
     if (this.props.allSubnets !== null) {
       subnetItems = Object.keys(this.props.allSubnets).map(key => {
@@ -41,7 +40,7 @@ class Subnet extends React.Component {
               })
 
             }}>Edit</Link>
-              <button onClick={() => { Firebase.database().ref(`/subnets/${key}`).remove(); this.props.deleteSubnetInfo(key); this.forceUpdate() }}>Delete</button></th>
+              <button onClick={() => { deleteItem(this.props.allSubnets[key].ip_address, "subnets", key, this.props.deleteSubnetInfo); this.forceUpdate() }}>Delete</button></th>
           </tr>
         )
       })
