@@ -1,26 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Firebase from '../../../firebaseConfig';
-import { addVlanInfo, resetVlan, setVlan, deleteVlanInfo } from '../../../actions'
+import { addVlanInfo, resetVlan, setVlan, deleteVlanInfo, fetchItems } from '../../../actions'
 import { connect } from 'react-redux'
+import { Table } from '../../index'
 
 class Vlan extends React.Component {
   componentDidMount() {
-    this.fetchVlans()
-  }
-
-  fetchVlans = () => {
-    Firebase.database().ref("/vlans").once("value", data => {
-      var vlans = data.val()
-      if (vlans !== null) {
-        Object.keys(vlans).map(key => {
-          return this.props.addVlanInfo(key, vlans[key])
-        })
-      } else {
-        return vlans
-      }
-
-    })
+    fetchItems("vlans", this.props.addVlanInfo)
   }
 
   render() {
@@ -29,11 +16,11 @@ class Vlan extends React.Component {
     if (this.props.allVlans !== null) {
       vlanItems = Object.keys(this.props.allVlans).map(key => {
         var vlanSubnets = null;
-        if(this.props.allVlans[key].subnets !== undefined) {
-            vlanSubnets = Object.keys(this.props.allVlans[key].subnets).map(subnetKey => {
+        if (this.props.allVlans[key].subnets !== undefined) {
+          vlanSubnets = Object.keys(this.props.allVlans[key].subnets).map(subnetKey => {
             return (<div key={subnetKey}>{this.props.allVlans[key].subnets[subnetKey]}</div>)
-            })
-        } 
+          })
+        }
         return (
           <tr key={key}>
             <th>{this.props.allVlans[key].id_vlan}</th>
@@ -57,17 +44,7 @@ class Vlan extends React.Component {
       <div>
         <label>VLAN</label>
         <Link to="/register_vlan">Register VLAN</Link>
-        <table>
-          <tbody>
-            <tr>
-              <th>ID VLAN</th>
-              <th>Description</th>
-              <th>Subnets</th>
-              <th>Actions</th>
-            </tr>
-            {vlanItems}
-          </tbody>
-        </table>
+        <Table tabledef={["ID VLAN", "Description", "Subnets", "Actions"]} items={vlanItems} />
       </div>
     )
   }

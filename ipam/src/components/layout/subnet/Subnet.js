@@ -1,26 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Firebase from '../../../firebaseConfig';
-import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo } from '../../../actions'
+import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo, fetchItems } from '../../../actions'
 import { connect } from 'react-redux'
+import { Table } from '../../index'
 
 class Subnet extends React.Component {
   componentDidMount() {
-    this.fetchSubnets()
-  }
-
-  fetchSubnets = () => {
-    Firebase.database().ref("/subnets").once("value", data => {
-      var subnets = data.val()
-      if (subnets !== null) {
-        Object.keys(subnets).map(key => {
-          return this.props.addSubnetInfo(key, subnets[key])
-        })
-      } else {
-        return subnets
-      }
-
-    })
+    fetchItems("subnets", this.props.addSubnetInfo)
   }
 
   render() {
@@ -63,23 +50,7 @@ class Subnet extends React.Component {
       <div>
         <label>Subnet</label>
         <Link to="/register_subnet">Register Subnet</Link>
-        <table>
-          <tbody>
-            <tr>
-              <th>IP address</th>
-              <th>Netmask</th>
-              <th>IP assignment</th>
-              <th>Is routable</th>
-              <th>Location</th>
-              <th>Nameservers</th>
-              <th>Type</th>
-              <th>Vlan</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-            {subnetItems}
-          </tbody>
-        </table>
+        <Table tabledef={["IP address", "Netmask", "IP assignment", "Is routable", "Location", "Nameservers", "Type", "Vlan", "Description", "Actions"]} items={subnetItems} />
       </div>
     )
   }

@@ -1,31 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Firebase from '../../../firebaseConfig';
-import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo } from '../../../actions'
+import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo, fetchItems } from '../../../actions'
 import { connect } from 'react-redux'
+import { Table } from '../../index'
+
 class Location extends React.Component {
 
   componentDidMount() {
-    this.fetchLocations()
-  }
-
-  fetchLocations = () => {
-    Firebase.database().ref("/locations").once("value", data => {
-      var locations = data.val()
-      if (locations !== null) {
-        Object.keys(locations).map(key => {
-          return this.props.addLocationInfo(key, locations[key])
-        })
-      } else {
-        return locations
-      }
-
-    })
+    fetchItems("locations", this.props.addLocationInfo)
   }
 
   render() {
     this.props.resetLocation()
-
 
     var locationItems = null
     if (this.props.allLocations !== null) {
@@ -48,22 +35,11 @@ class Location extends React.Component {
       })
     }
 
-
-
     return (
       <div>
         <label>Subnet</label>
         <Link to="/register_location">Register Location</Link>
-        <table>
-          <tbody>
-            <tr>
-              <th>Location</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-            { locationItems }
-          </tbody>
-        </table>
+        <Table tabledef={["Location", "Description", "Actions"]} items={locationItems} />
       </div>
     )
   }
@@ -72,5 +48,6 @@ class Location extends React.Component {
 const mapStateToProps = ({ allLocationsReducer }) => ({
   allLocations: allLocationsReducer
 })
+
 
 export default connect(mapStateToProps, { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo })(Location)
