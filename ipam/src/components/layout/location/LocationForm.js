@@ -1,6 +1,5 @@
 import React from 'react';
-import Firebase from '../../../firebaseConfig';
-import { setLocationItem, resetLocation } from '../../../actions'
+import { setLocationItem, resetLocation, addItem, updateItem } from '../../../actions'
 import { connect } from 'react-redux'
 
 class LocationForm extends React.Component {
@@ -12,17 +11,9 @@ class LocationForm extends React.Component {
       "description": this.props.location.description
     }
     if (this.props.location.location_key === "") {
-      Firebase.database().ref('/locations').push(locationTmp)
+      addItem("locations", locationTmp)
     } else {
-      Firebase.database().ref('/locations').child(this.props.location.location_key)
-        .update(locationTmp).then(() => {
-          return {}
-        }).catch(error => {
-          return {
-            errorCode: error.code,
-            errorMessage: error.message
-          }
-        })
+      updateItem("locations", this.props.location.location_key, locationTmp)
     }
     this.props.resetLocation()
     this.props.history.push("/location");

@@ -10,7 +10,6 @@ export const fetchItems = (dbRef, fun) => {
     } else {
       return items
     }
-
   })
 }
 
@@ -20,4 +19,20 @@ export const deleteItem = (uniqueValue, dbRef, key, fun) => {
     Firebase.database().ref(`/${dbRef}/${key}`).remove()
     fun(key)
   }
+}
+
+export const addItem = (dbRef, item) => {
+  Firebase.database().ref(`/${dbRef}`).push(item)
+}
+
+export const updateItem = (dbRef, key, item) => {
+  Firebase.database().ref(`/${dbRef}`).child(key)
+    .update(item).then(() => {
+      return {}
+    }).catch(error => {
+      return {
+        errorCode: error.code,
+        errorMessage: error.message
+      }
+    })
 }

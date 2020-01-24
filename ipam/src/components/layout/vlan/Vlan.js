@@ -31,14 +31,11 @@ class Vlan extends React.Component {
                 vlan_key: key,
                 id_vlan: this.props.allVlans[key].id_vlan,
                 description: this.props.allVlans[key].description,
-                subnets: this.props.allVlans[key].subnets,
+                subnets: this.props.allVlans[key].subnets ? this.props.allVlans[key].subnets : null,
               })
 
             }}>Edit</Link>
-              <button onClick={() => {
-                deleteItem(this.props.allVlans[key].id_vlan, "vlans", key, this.props.deleteVlanInfo)
-                this.forceUpdate()
-              }}>Delete</button></th>
+              <button onClick={() => { deleteItem(this.props.allVlans[key].id_vlan, "vlans", key, this.props.deleteVlanInfo); this.forceUpdate()}}>Delete</button></th>
           </tr>
         )
       })

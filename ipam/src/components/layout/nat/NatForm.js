@@ -1,6 +1,5 @@
 import React from 'react';
-import Firebase from '../../../firebaseConfig';
-import { setNatItem, resetNat } from '../../../actions'
+import { setNatItem, resetNat, addItem, updateItem } from '../../../actions'
 import { connect } from 'react-redux'
 
 class NatForm extends React.Component {
@@ -8,29 +7,23 @@ class NatForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     var natTmp = {
-        "name": this.props.nat.name,
-        "device": this.props.nat.device,
-        "description": this.props.nat.description,
-        "ip_external": this.props.nat.ip_external,
-        "internal_subnet": this.props.nat.internal_subnet
+      "name": this.props.nat.name,
+      "device": this.props.nat.device,
+      "description": this.props.nat.description,
+      "ip_external": this.props.nat.ip_external,
+      "internal_subnet": this.props.nat.internal_subnet
     }
     if (this.props.nat.nat_key === "") {
-      Firebase.database().ref('/nats').push(natTmp) 
+      addItem("nats", natTmp)
     } else {
-      Firebase.database().ref('/nats').child(this.props.nat.nat_key)
-      .update(natTmp).then(() => {
-        return {}}).catch(error => {
-          return {
-            errorCode: error.code,
-            errorMessage: error.message
-          }})
+      updateItem("nats", this.props.nat.nat_key, natTmp)
     }
     this.props.resetNat()
     this.props.history.push("/nat"); // redirect after success
   }
 
   handleChange = e => {
-    const { name, value} = e.target
+    const { name, value } = e.target
     this.props.setNatItem(name, value)
   }
 

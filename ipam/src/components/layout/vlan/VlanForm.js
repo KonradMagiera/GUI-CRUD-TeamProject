@@ -1,26 +1,11 @@
 import React from 'react';
-import Firebase from '../../../firebaseConfig';
-import { setVlanItem, resetVlan, addVlanSubnet } from '../../../actions'
+import { setVlanItem, resetVlan, addVlanSubnet, fetchItems, addItem, updateItem } from '../../../actions'
 import { addSubnetInfo, resetSubnet } from '../../../actions'
 import { connect } from 'react-redux'
 
 class VlanForm extends React.Component {
   componentDidMount() {
-    this.fetchSubnets()
-  }
-
-  fetchSubnets = () => {
-    Firebase.database().ref("/subnets").once("value", data => {
-      var subnets = data.val()
-      if (subnets !== null) {
-        Object.keys(subnets).map(key => {
-          return this.props.addSubnetInfo(key, subnets[key])
-        })
-      } else {
-        return subnets
-      }
-
-    })
+    fetchItems("subnets", this.props.addSubnetInfo)
   }
 
   handleSubmit(e) {
@@ -31,17 +16,9 @@ class VlanForm extends React.Component {
       "subnets": this.props.vlan.subnets,
     }
     if (this.props.vlan.vlan_key === "") {
-      Firebase.database().ref('/vlans').push(vlanTmp)
+      addItem("vlans", vlanTmp)
     } else {
-      Firebase.database().ref('/vlans').child(this.props.vlan.vlan_key)
-        .update(vlanTmp).then(() => {
-          return {}
-        }).catch(error => {
-          return {
-            errorCode: error.code,
-            errorMessage: error.message
-          }
-        })
+      updateItem("vlans", this.props.vlan.vlan_key, vlanTmp)
     }
     this.props.resetVlan()
     this.props.history.push("/vlan"); // redirect after success

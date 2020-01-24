@@ -1,6 +1,5 @@
 import React from 'react';
-import Firebase from '../../../firebaseConfig';
-import { setSubnetItem, resetSubnet } from '../../../actions'
+import { setSubnetItem, resetSubnet, addItem, updateItem } from '../../../actions'
 import { connect } from 'react-redux'
 
 class SubnetForm extends React.Component {
@@ -19,17 +18,9 @@ class SubnetForm extends React.Component {
       "description": this.props.subnet.description
     }
     if (this.props.subnet.subnet_key === "") {
-      Firebase.database().ref('/subnets').push(subnetTmp)
+      addItem("subnets", subnetTmp)
     } else {
-      Firebase.database().ref('/subnets').child(this.props.subnet.subnet_key)
-        .update(subnetTmp).then(() => {
-          return {}
-        }).catch(error => {
-          return {
-            errorCode: error.code,
-            errorMessage: error.message
-          }
-        })
+      updateItem("subnets", this.props.subnet.subnet_key, subnetTmp)
     }
     this.props.resetSubnet()
     this.props.history.push("/subnet");
