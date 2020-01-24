@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login, resetSubnet, resetVlan, resetLocation } from '../../actions'
+import { login, resetSubnet, resetVlan, resetLocation, resetNat } from '../../actions'
 
 
 function Header(props) {
@@ -14,6 +14,7 @@ function Header(props) {
             props.resetSubnet()
             props.resetLocation()
             props.resetVlan()
+            props.resetNat()
             }}>Logout</button>
         </Link>
         <Link to="/home">
@@ -27,12 +28,17 @@ function Header(props) {
         <Link to="/vlan">
           <button>VLAN</button>
         </Link>
+
         <Link to="/location">
           <button>Location</button>
+        </Link>
+
+        <Link to="/nat">
+          <button>NAT</button>
         </Link>
       </nav>
     </header>
   )
 }
 
-export default connect(null, {login, resetSubnet, resetVlan, resetLocation})(Header)
+export default connect(null, {login, resetSubnet, resetVlan, resetLocation, resetNat})(Header)

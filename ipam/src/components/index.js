@@ -9,5 +9,7 @@ import Location from "./layout/location/Location"
 import LocationForm from "./layout/location/LocationForm"
 import PrivateRoute from './PrivateRoute'
 import Table from './layout/Table'
+import Nat from "./layout/nat/Nat"
+import NatForm from "./layout/nat/NatForm"
 
-export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table }
+export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table, Nat, NatForm }
