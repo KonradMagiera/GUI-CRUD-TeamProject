@@ -1,7 +1,8 @@
 import React from 'react'
 
 function Table(props) {
-  const tabledef = props.tabledef.map(id => {
+  const tableRows = [...props.tabledef, "Actions"]
+  const tabledef = tableRows.map(id => {
     return (
       <th key={id}>{id}</th>
     )

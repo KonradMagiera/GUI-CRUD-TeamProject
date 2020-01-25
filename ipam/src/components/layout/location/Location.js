@@ -38,7 +38,7 @@ class Location extends React.Component {
       <div>
         <label>Subnet</label>
         <Link to="/register_location">Register Location</Link>
-        <Table tabledef={["Location", "Description", "Actions"]} items={locationItems} />
+        <Table tabledef={["Location", "Description"]} items={locationItems} />
       </div>
     )
   }

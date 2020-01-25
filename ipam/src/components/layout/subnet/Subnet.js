@@ -49,7 +49,7 @@ class Subnet extends React.Component {
       <div>
         <label>Subnet</label>
         <Link to="/register_subnet">Register Subnet</Link>
-        <Table tabledef={["IP address", "Netmask", "IP assignment", "Is routable", "Location", "Nameservers", "Type", "Vlan", "Description", "Actions"]} items={subnetItems} />
+        <Table tabledef={["IP address", "Netmask", "IP assignment", "Is routable", "Location", "Nameservers", "Type", "Vlan", "Description"]} items={subnetItems} />
       </div>
     )
   }

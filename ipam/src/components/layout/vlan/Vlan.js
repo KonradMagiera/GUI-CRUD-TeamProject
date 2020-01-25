@@ -45,7 +45,7 @@ class Vlan extends React.Component {
       <div>
         <label>VLAN</label>
         <Link to="/register_vlan">Register VLAN</Link>
-        <Table tabledef={["ID VLAN", "Description", "Subnets", "Actions"]} items={vlanItems} />
+        <Table tabledef={["ID VLAN", "Description", "Subnets"]} items={vlanItems} />
       </div>
     )
   }
