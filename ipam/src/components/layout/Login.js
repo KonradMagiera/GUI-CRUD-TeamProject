@@ -22,13 +22,17 @@ class Login extends React.Component {
       return <Redirect to="/home" />
     }
     return (
-      <form onSubmit={e => this.handleLogin(e)}>
-        <input type="text" name="email" placeholder="email" />
-        <input type="password" name="password" placeholder="password" />
+      <div className="container-middle">
+      <form className="form-middle" onSubmit={e => this.handleLogin(e)}>
+        <label for="email" className="login-label">Email:</label>
+        <input type="text" name="email" className="login-input" placeholder="email" />
+        <label for="password" className="login-label">Password:</label>
+        <input type="password" name="password" className="login-input" placeholder="password" />
         <div>
           <button>Sign in</button>
         </div>
       </form>
+      </div>
     )
   }
 }

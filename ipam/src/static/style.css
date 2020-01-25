@@ -62,7 +62,6 @@ background-color: #252526;
 color: rgb(200, 221, 228); 
 */
 
-
 .menuItem:hover {
   background-color: #41c1fc;
   cursor: pointer;
@@ -116,6 +115,40 @@ color: rgb(200, 221, 228);
   font-weight: bold;
   background-color: #78db64;
   border: 0;
+  cursor: pointer;
+}
+
+.container-middle {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: #088dc2;
+}
+
+.form-middle {
+  display: block;
+  margin: auto;
+  max-width: 280px;
+}
+
+.login-label {
+  display: inline-block;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+}
+
+.login-input {
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 0px 5px 0px;
+  font-size: 26px;
+}
+
+.middle {
+  text-align: center;
 }
 
 table {
