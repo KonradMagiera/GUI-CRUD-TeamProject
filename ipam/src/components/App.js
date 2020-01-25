@@ -1,14 +1,19 @@
 import React from 'react';
-import { Login, Home, SubnetForm, PrivateRoute, Header, Subnet, Vlan, VlanForm, Location, LocationForm, Nat, NatForm } from "./index"
+import { Login, Home, SubnetForm, PrivateRoute, Header, Subnet, Vlan, VlanForm, Location, LocationForm, Nat, NatForm, SideMenu } from "./index"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
 function App() {
   return (
     <Router>
-      <PrivateRoute path="/" component={Header} />
+
+      <div className="header"><PrivateRoute path="/" component={Header} />
+      </div>
+      
+      <PrivateRoute path="/" component={SideMenu} />
       <Switch>
         <Route exact path="/" component={Login} />
+      <div className="right">
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/subnet" component={Subnet} />
         <PrivateRoute path="/vlan" component={Vlan} />
@@ -22,8 +27,9 @@ function App() {
         <PrivateRoute path="/edit_location" component={LocationForm} />
         <PrivateRoute path="/edit_vlan" component={VlanForm} />
         <PrivateRoute path="/edit_nat" component={NatForm} />
-        
+        </div>
       </Switch>
+
     </Router>
   )
 }

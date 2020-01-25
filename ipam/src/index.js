@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import reducers from './reducers'
 import App from './components/App';
 import './static/style.css'
-import './static/header.css'
 
 const store = createStore(reducers, {}, applyMiddleware(thunk))
 ReactDOM.render(

@@ -12,4 +12,6 @@ import Table from './layout/Table'
 import Nat from "./layout/nat/Nat"
 import NatForm from "./layout/nat/NatForm"
 
-export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table, Nat, NatForm }
+
+import SideMenu from './layout/SideMenu'
+export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table, Nat, NatForm, SideMenu }

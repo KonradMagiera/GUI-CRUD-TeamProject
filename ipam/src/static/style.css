@@ -1,5 +1,53 @@
-html,
-body {
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-size: 20px;
+} 
+
+.top-bar {
   margin: 0px;
-  font-size: 18px;
+  background-color: #585858;
+  padding: 5px;
+  height: 75px;
+  line-height: 40px;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.top-bar-links {
+  justify-content: space-between;
+}
+
+.menuItem {
+  width: 100%;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 5px 0 5px 0;
+  background-color: rgb(185, 112, 112);
+  border: 0px;
+}
+
+.left { 
+  position: absolute;
+  top: 75px;
+  left: 0;
+  bottom: 0;
+  width: 150px; 
+  background-color: rgb(173, 36, 36);
+} 
+
+.right { 
+  position: absolute;
+  width: calc(100% - 150px); 
+  height: calc(100% - 75px);
+  top: 75px;
+  left: 150px;
+  bottom: 0; 
+  background-color: rgb(151, 151, 172); 
 }

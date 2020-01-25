@@ -20,22 +20,6 @@ function Header(props) {
         <Link to="/home">
           <button>Home</button>
         </Link>
-
-        <Link to="/subnet">
-          <button>Subnet</button>
-        </Link>
-
-        <Link to="/vlan">
-          <button>VLAN</button>
-        </Link>
-
-        <Link to="/location">
-          <button>Location</button>
-        </Link>
-
-        <Link to="/nat">
-          <button>NAT</button>
-        </Link>
       </nav>
     </header>
   )
