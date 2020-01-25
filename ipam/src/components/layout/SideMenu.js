@@ -8,19 +8,19 @@ function SideMenu() {
     <div className="left">
       <nav>
         <Link to="/subnet">
-          <button className="menuItem"><img src={subnet} alt="Subnet"/>Subnet</button>
+          <button className="menuItem"><img src={subnet} alt="Subnet" className="img-sidemenu"/>Subnet</button>
         </Link>
 
         <Link to="/vlan">
-          <button className="menuItem"><img src={vlan} alt="VLAN"/>VLAN</button>
+          <button className="menuItem"><img src={vlan} alt="VLAN" className="img-sidemenu"/>VLAN</button>
         </Link>
 
         <Link to="/location">
-          <button className="menuItem"><img src={location} alt="Location"/>Location</button>
+          <button className="menuItem"><img src={location} alt="Location" className="img-sidemenu"/>Location</button>
         </Link>
 
         <Link to="/nat">
-          <button className="menuItem"><img src={vlan} alt="NAT"/>NAT</button>
+          <button className="menuItem"><img src={vlan} alt="NAT" className="img-sidemenu"/>NAT</button>
         </Link>
       </nav>
     </div>

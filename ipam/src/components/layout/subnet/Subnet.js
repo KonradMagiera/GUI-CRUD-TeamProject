@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { setSubnet, setSubnetItem, resetSubnet, addSubnetInfo, deleteSubnetInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
+import edit from '../../../static/edit.png'
+import remove from '../../../static/delete.png'
 
 class Subnet extends React.Component {
   componentDidMount() {
@@ -39,16 +41,16 @@ class Subnet extends React.Component {
                 description: this.props.allSubnets[key].description
               })
 
-            }}>Edit</Link>
-              <button onClick={() => { deleteItem(this.props.allSubnets[key].ip_address, "subnets", key, this.props.deleteSubnetInfo); this.forceUpdate() }}>Delete</button></th>
+            }}><img src={edit} alt="Edit" className="img-table" /></Link>
+              <img src={remove} alt="Delete" className="img-table" onClick={() => { deleteItem(this.props.allSubnets[key].ip_address, "subnets", key, this.props.deleteSubnetInfo); this.forceUpdate() }} />
+            </th>
           </tr>
         )
       })
     }
     return (
       <div>
-        <label>Subnet</label>
-        <Link to="/register_subnet">Register Subnet</Link>
+        <Link to="/register_subnet"><button className="register">Register Subnet</button></Link>
         <Table tabledef={["IP address", "Netmask", "IP assignment", "Is routable", "Location", "Nameservers", "Type", "Vlan", "Description"]} items={subnetItems} />
       </div>
     )

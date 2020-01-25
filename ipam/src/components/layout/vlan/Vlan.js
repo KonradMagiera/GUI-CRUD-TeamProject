@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { addVlanInfo, resetVlan, setVlan, deleteVlanInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
+import edit from '../../../static/edit.png'
+import remove from '../../../static/delete.png'
 
 class Vlan extends React.Component {
   componentDidMount() {
@@ -24,8 +26,8 @@ class Vlan extends React.Component {
         return (
           <tr key={key}>
             <th>{this.props.allVlans[key].id_vlan}</th>
-            <th>{this.props.allVlans[key].description}</th>
             <th>{vlanSubnets}</th>
+            <th>{this.props.allVlans[key].description}</th>
             <th><Link to="/edit_vlan" onClick={() => {
               this.props.setVlan({
                 vlan_key: key,
@@ -34,8 +36,9 @@ class Vlan extends React.Component {
                 subnets: this.props.allVlans[key].subnets ? this.props.allVlans[key].subnets : null,
               })
 
-            }}>Edit</Link>
-              <button onClick={() => { deleteItem(this.props.allVlans[key].id_vlan, "vlans", key, this.props.deleteVlanInfo); this.forceUpdate()}}>Delete</button></th>
+            }}><img src={edit} alt="Edit" className="img-table"/></Link>
+              <img src={remove} alt="Delete" className="img-table" onClick={() => { deleteItem(this.props.allVlans[key].id_vlan, "vlans", key, this.props.deleteVlanInfo); this.forceUpdate()}}/>
+            </th>
           </tr>
         )
       })
@@ -43,9 +46,8 @@ class Vlan extends React.Component {
 
     return (
       <div>
-        <label>VLAN</label>
-        <Link to="/register_vlan">Register VLAN</Link>
-        <Table tabledef={["ID VLAN", "Description", "Subnets"]} items={vlanItems} />
+        <Link to="/register_vlan"><button className="register">Register VLAN</button></Link>
+        <Table tabledef={["ID VLAN", "Subnets", "Description"]} items={vlanItems} />
       </div>
     )
   }

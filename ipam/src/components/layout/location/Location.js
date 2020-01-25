@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
+import edit from '../../../static/edit.png'
+import remove from '../../../static/delete.png'
 
 class Location extends React.Component {
 
@@ -27,8 +29,9 @@ class Location extends React.Component {
                 description: this.props.allLocations[key].description
               })
 
-            }}>Edit</Link>
-              <button onClick={() => { deleteItem(this.props.allLocations[key].location, "locations", key, this.props.deleteLocationInfo); this.forceUpdate() }}>Delete</button></th>
+            }}><img src={edit} alt="Edit" className="img-table" /></Link>
+              <img src={remove} alt="Delete" className="img-table" onClick={() => { deleteItem(this.props.allLocations[key].location, "locations", key, this.props.deleteLocationInfo); this.forceUpdate() }} />
+            </th>
           </tr>
         )
       })
@@ -36,8 +39,7 @@ class Location extends React.Component {
 
     return (
       <div>
-        <label>Subnet</label>
-        <Link to="/register_location">Register Location</Link>
+        <Link to="/register_location"><button className="register">Register Location</button></Link>
         <Table tabledef={["Location", "Description"]} items={locationItems} />
       </div>
     )

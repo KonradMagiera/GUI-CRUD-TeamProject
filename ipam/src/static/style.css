@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   margin: 0;
   font-size: 20px;
-  
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 } 
 
 .left { 
@@ -14,6 +14,9 @@ html, body {
   width: 200px; 
   background-color: #2d7cbd;
 } 
+/*
+background-color: #333333;
+*/
 
 .right { 
   position: absolute;
@@ -53,9 +56,12 @@ html, body {
   margin: 5px 8px 5px 8px;
   background-color: #35afe7;
   border: 0;
-
-  
 }
+/* 
+background-color: #252526;
+color: rgb(200, 221, 228); 
+*/
+
 
 .menuItem:hover {
   background-color: #41c1fc;
@@ -66,14 +72,16 @@ html, body {
   background-color: #088dc2;
 }
 
-img {
+.img-sidemenu {
   position: absolute;
   height: 25px;
   left: 15px;
 }
 
-tr:nth-child(even) {
-  background-color: #eaeaea;
+.img-table {
+  height: 30px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .logo {
@@ -90,15 +98,46 @@ tr:nth-child(even) {
 .logout {
   position: absolute;
   right: 0px;
+  top: 15px;
 }
-.logout button {
+.logout {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 20px;
   color: white;
   background: none;
   border: 0px;
+  cursor: pointer;
+}
+
+.register {
+  padding: 7px;
+  width: 30%;
+  margin: 10px 0px 10px 20px;
+  font-weight: bold;
+  background-color: #78db64;
+  border: 0;
 }
 
 table {
+  table-layout: fixed;
   width: 100%;
+  border-collapse: collapse;
+  word-wrap: break-word;
+}
+
+tr:nth-child(even) {
+  background-color: #eaeaea;
+}
+
+tr:first-child { 
+  background: #35afe7;
+}
+th:last-child {
+  width: 90px;
+}
+th:nth-last-child(2) {
+  width: 20%;
+}
+th, tr {
+  border: 1px solid black;
 }

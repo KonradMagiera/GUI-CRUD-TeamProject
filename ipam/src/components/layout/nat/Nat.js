@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { setNat, setNatItem, resetNat, addNatInfo, deleteNatInfo, fetchItems, deleteItem } from '../../../actions'
 import { connect } from 'react-redux'
 import { Table } from '../../index'
+import edit from '../../../static/edit.png'
+import remove from '../../../static/delete.png'
 
 class Nat extends React.Component {
   componentDidMount() {
@@ -18,9 +20,9 @@ class Nat extends React.Component {
           <tr key={key}>
             <th>{this.props.allNats[key].name}</th>
             <th>{this.props.allNats[key].device}</th>
-            <th>{this.props.allNats[key].description}</th>
             <th>{this.props.allNats[key].ip_external}</th>
             <th>{this.props.allNats[key].internal_subnet}</th>
+            <th>{this.props.allNats[key].description}</th>
             <th><Link to="/edit_nat" onClick={() => {
               this.props.setNat({
                 nat_key: key,
@@ -31,17 +33,17 @@ class Nat extends React.Component {
                 internal_subnet: this.props.allNats[key].internal_subnet,
               })
 
-            }}>Edit</Link>
-              <button onClick={() => { deleteItem(this.props.allNats[key].name, "nats", key, this.props.deleteNatInfo); this.forceUpdate() }}>Delete</button></th>
+            }}><img src={edit} alt="Edit" className="img-table" /></Link>
+              <img src={remove} alt="Delete" className="img-table" onClick={() => { deleteItem(this.props.allNats[key].name, "nats", key, this.props.deleteNatInfo); this.forceUpdate() }} />
+            </th>
           </tr>
         )
       })
     }
     return (
       <div>
-        <label>NAT</label>
-        <Link to="/register_nat">Register NAT</Link>
-        <Table tabledef={["Name", "Device", "Description", "External IP", "Internal subnet"]} items={natItems} />
+        <Link to="/register_nat"><button className="register">Register NAT</button></Link>
+        <Table tabledef={["Name", "Device", "External IP", "Internal subnet", "Description"]} items={natItems} />
       </div>
     )
   }

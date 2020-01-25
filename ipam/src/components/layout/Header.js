@@ -11,8 +11,8 @@ function Header(props) {
         <Link to="/home">
           <label className="logo">IP Managment Studio</label>
         </Link>
-        <Link to="/" className="logout">
-          <button onClick={() => {
+        <Link to="/">
+          <button  className="logout" onClick={() => {
             props.login(false)
             props.resetSubnet()
             props.resetLocation()
