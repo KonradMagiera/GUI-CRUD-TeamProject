@@ -8,6 +8,7 @@ import remove from '../../../static/delete.png'
 
 class Subnet extends React.Component {
   componentDidMount() {
+    document.body.style.cursor='wait'
     fetchItems("subnets", this.props.addSubnetInfo)
   }
 
@@ -48,6 +49,7 @@ class Subnet extends React.Component {
         )
       })
     }
+    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_subnet"><button className="register">Register Subnet</button></Link>

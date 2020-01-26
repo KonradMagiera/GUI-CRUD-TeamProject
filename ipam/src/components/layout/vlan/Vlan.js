@@ -8,6 +8,7 @@ import remove from '../../../static/delete.png'
 
 class Vlan extends React.Component {
   componentDidMount() {
+    document.body.style.cursor='wait'
     fetchItems("vlans", this.props.addVlanInfo)
   }
 
@@ -43,7 +44,7 @@ class Vlan extends React.Component {
         )
       })
     }
-
+    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_vlan"><button className="register">Register VLAN</button></Link>

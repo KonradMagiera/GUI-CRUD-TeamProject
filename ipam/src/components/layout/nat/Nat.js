@@ -8,6 +8,7 @@ import remove from '../../../static/delete.png'
 
 class Nat extends React.Component {
   componentDidMount() {
+    document.body.style.cursor='wait'
     fetchItems("nats", this.props.addNatInfo)
   }
 
@@ -40,6 +41,7 @@ class Nat extends React.Component {
         )
       })
     }
+    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_nat"><button className="register">Register NAT</button></Link>

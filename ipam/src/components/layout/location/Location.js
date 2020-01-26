@@ -9,6 +9,7 @@ import remove from '../../../static/delete.png'
 class Location extends React.Component {
 
   componentDidMount() {
+    document.body.style.cursor='wait'
     fetchItems("locations", this.props.addLocationInfo)
   }
 
@@ -36,7 +37,7 @@ class Location extends React.Component {
         )
       })
     }
-
+    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_location"><button className="register">Register Location</button></Link>
