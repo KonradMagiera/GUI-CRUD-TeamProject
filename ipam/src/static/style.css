@@ -243,10 +243,10 @@ th div {
 }
 
 .register-box button {
-  color: black;
-  /*background: #2c8cff;*/
-  background-color: #35afe7;
-  /*width: 100%;*/  
+  color: white;
+  background: #2c8cff;
+  /*background-color: #35afe7;*/
+  /* width: 100%; */
   border: 0px;
   outline: none;
   padding: 10px 20px;
@@ -255,11 +255,10 @@ th div {
   margin-top: 10px;
   display: inline-block;  
   font-size: 20px;
-  font-weight: bold;
 }
 
 .register-box button:hover {
-  background-color: #41c1fc;
+  background-color: #30aae2;
   cursor: pointer;
 }
 
