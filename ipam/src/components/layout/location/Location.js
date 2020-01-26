@@ -37,7 +37,6 @@ class Location extends React.Component {
         )
       })
     }
-    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_location"><button className="register">Register Location</button></Link>

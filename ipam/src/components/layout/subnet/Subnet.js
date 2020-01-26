@@ -49,7 +49,6 @@ class Subnet extends React.Component {
         )
       })
     }
-    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_subnet"><button className="register">Register Subnet</button></Link>

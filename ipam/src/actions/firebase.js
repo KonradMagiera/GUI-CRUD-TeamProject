@@ -7,10 +7,13 @@ export const fetchItems = (dbRef, fun) => {
       Object.keys(items).map(key => {
         return fun(key, items[key])
       })
+      document.body.style.cursor='default'
     } else {
+      document.body.style.cursor='default'
       return items
     }
   })
+  
 }
 
 export const deleteItem = (uniqueValue, dbRef, key, fun) => {

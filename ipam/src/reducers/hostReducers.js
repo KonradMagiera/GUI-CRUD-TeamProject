@@ -10,9 +10,9 @@ const initialHost = {
     gateway: false,
     owner: "",
     device_description: "",
-    device_location: ""
+    location_description: ""
   }
-  
+
   export function hostReducer(state = initialHost, { type, name, value, host }) {
     Object.freeze(state)
     switch (type) {

@@ -13,10 +13,12 @@ class HostForm extends React.Component {
       "mac_address": this.props.host.mac_address,
       "gateway": this.props.host.gateway,
       "owner": this.props.host.owner,
-      "device_description": this.props.host.device_descption,
+      "device_description": this.props.host.device_description,
       "location_description": this.props.host.location_description
     }
+    
     if (this.props.host.host_key === "") {
+      console.log(hostTmp)
       addItem("hosts", hostTmp)
     } else {
       updateItem("hosts", this.props.host.host_key, hostTmp)

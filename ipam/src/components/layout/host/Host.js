@@ -20,13 +20,13 @@ class Host extends React.Component {
         return (
           <tr key={key}>
             <th><div>{this.props.allHosts[key].ip}</div></th>
-            <th><div>{this.props.allHosts[key].hostname}</div></th>
-            <th><div>{this.props.allHosts[key].description}</div></th>
+            <th><div>{this.props.allHosts[key].hostname}</div></th>  
             <th><div>{this.props.allHosts[key].mac_address}</div></th>
             <th><div>{this.props.allHosts[key].gateway ? "Yes" : "No"}</div></th>
             <th><div>{this.props.allHosts[key].owner}</div></th>
             <th><div>{this.props.allHosts[key].device_description}</div></th>
             <th><div>{this.props.allHosts[key].location_description}</div></th>
+            <th><div>{this.props.allHosts[key].description}</div></th>
             <th><Link to="/edit_host" onClick={() => {
               this.props.setHost({
                 host_key: key,
@@ -47,11 +47,10 @@ class Host extends React.Component {
         )
       })
     }
-    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_host"><button className="register">Register host</button></Link>
-        <Table tabledef={["IP", "Hostname", "Description", "MAC address", "Gateway", "Owner", "Device description", "Location description"]} items={hostItems} />
+        <Table tabledef={["IP", "Hostname", "MAC address", "Gateway", "Owner", "Device description", "Location description", "Description"]} items={hostItems} />
       </div>
     )
   }

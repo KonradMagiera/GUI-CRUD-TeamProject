@@ -44,7 +44,6 @@ class Vlan extends React.Component {
         )
       })
     }
-    document.body.style.cursor='default'
     return (
       <div className="right">
         <Link to="/register_vlan"><button className="register">Register VLAN</button></Link>
