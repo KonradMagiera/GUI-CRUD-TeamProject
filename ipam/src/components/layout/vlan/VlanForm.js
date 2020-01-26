@@ -38,6 +38,10 @@ class VlanForm extends React.Component {
     }
   }
 
+  cancelOperation = () => {
+    this.props.history.push("/vlan");
+  }
+
   render() {  // Subnets musza być chyba wybierane z tych zarejestrowanych    
     this.props.resetSubnet()
     var subnetItems = null
@@ -53,33 +57,22 @@ class VlanForm extends React.Component {
 
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
-        <div>
+        <div className="register-box">
           <h2>{this.props.vlan.vlan_key === "" ? "Register VLAN" : "Edit VLAN"}</h2>
-        </div>
-        <div>
           <label htmlFor="id_vlan">ID VLAN</label>
-        </div>
-        <div>
-          <input type="text" name="id_vlan" value={this.props.vlan.id_vlan} placeholder="id_vlan" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="id_vlan" value={this.props.vlan.id_vlan} placeholder="ID VLAN" onChange={e => this.handleChange(e)} />
           <label htmlFor="description">Description</label>
-        </div>
-        <div>
-          <textarea name="description" value={this.props.vlan.description} placeholder="description" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <textarea name="description" value={this.props.vlan.description} placeholder="Description" onChange={e => this.handleChange(e)} />
           <label htmlFor="subnets">Subnets</label>
-        </div>
-        <div>
           <select name="subnets" value="" onChange={e => this.handleChange(e)}>
             <option value="">--Subnet--</option>
             {subnetItems}
           </select>
           <textarea id="chosen_subnets" />
-        </div>
-        <div>
-          <button>{this.props.vlan.vlan_key === "" ? "Register" : "Update"}</button>
+          <div className="button-actions">
+            <button>{this.props.vlan.vlan_key === "" ? "Register" : "Update"}</button>
+            <button className="cancel-button" onClick={() => this.cancelOperation()}>Cancel</button>
+          </div>
         </div>
       </form>
     )

@@ -33,67 +33,50 @@ class SubnetForm extends React.Component {
       : this.props.setSubnetItem(name, value)
   }
 
+  cancelOperation = () => {
+    this.props.history.push("/subnet");
+  }
+
   render() {
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)} className="middle">
-        <div>
+      <form onSubmit={(e) => this.handleSubmit(e)}>
+        <div className="register-box">
           <h2>{this.props.subnet.subnet_key === "" ? "Register subnet" : "Edit subnet"}</h2>
-        </div>
-        <div>
           <label htmlFor="ip_address">IP address</label>
-        </div>
-        <div>
-          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="ip_address" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="IP address" onChange={e => this.handleChange(e)} />
           <label htmlFor="netmask">Netmask</label>
-        </div>
-        <div>
-          <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="netmask" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="Netmask" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
-        </div>
-        <div>
-          <input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="vlan" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="VLAN" onChange={e => this.handleChange(e)} />
           <label htmlFor="nameservers">Nameservers</label>
-        </div>
-        <div>
-          <input type="text" name="nameservers" value={this.props.subnet.nameservers} placeholder="nameservers" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="nameservers" value={this.props.subnet.nameservers} placeholder="Nameservers" onChange={e => this.handleChange(e)} />
           <label htmlFor="location">Location</label>
-        </div>
-        <div>
-          <input type="text" name="location" value={this.props.subnet.location} placeholder="location" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="location" value={this.props.subnet.location} placeholder="Location" onChange={e => this.handleChange(e)} />
           <label><input type="checkbox" value="routable" name="routable" checked={this.props.subnet.routable} onChange={e => this.handleChange(e)} />Is routable?</label>
-        </div>
-        <div>
           <label htmlFor="public_or_dmz">Public / DMZ</label>
-        </div>
-        <div>
-          <input type="radio" value="Public" name="public_or_dmz" checked={this.props.subnet.public_or_dmz === "Public"} onChange={e => this.handleChange(e)} />Public
-          <input type="radio" value="DMZ" name="public_or_dmz" checked={this.props.subnet.public_or_dmz === "DMZ"} onChange={e => this.handleChange(e)} />DMZ
-        </div>
-        <div>
+          <div className="radio-box">
+            <input type="radio" value="Public" name="public_or_dmz" id="radio_public" checked={this.props.subnet.public_or_dmz === "Public"} onChange={e => this.handleChange(e)} />
+            <label htmlFor="radio_public">Static</label>
+          </div>
+          <div className="radio-box">
+            <input type="radio" value="DMZ" id="radio_dmz" name="public_or_dmz" checked={this.props.subnet.public_or_dmz === "DMZ"} onChange={e => this.handleChange(e)} />
+            <label htmlFor="radio_dmz">DMZ</label>
+          </div>
           <label htmlFor="ip_assignment">IP assignment:</label>
-        </div>
-        <div>
-          <input type="radio" value="Static" name="ip_assignment" checked={this.props.subnet.ip_assignment === "Static"} onChange={e => this.handleChange(e)} />Static
-          <input type="radio" value="Dynamic" name="ip_assignment" checked={this.props.subnet.ip_assignment === "Dynamic"} onChange={e => this.handleChange(e)} />Dynamic
-        </div>
-        <div>
+          <div className="radio-box">
+            <input type="radio" value="Static" id="ip_assignment_static" name="ip_assignment" checked={this.props.subnet.ip_assignment === "Static"} onChange={e => this.handleChange(e)} />
+            <label htmlFor="ip_assignment_static">Static</label>
+          </div>
+          <div className="radio-box">
+            <input type="radio" value="Dynamic" name="ip_assignment" id="ip_assignment_dynamic" checked={this.props.subnet.ip_assignment === "Dynamic"} onChange={e => this.handleChange(e)} />
+            <label htmlFor="ip_assignment_dynamic">Dynamic</label>
+          </div>
           <label htmlFor="description">Description</label>
-        </div>
-        <div>
-          <textarea name="description" value={this.props.subnet.description} placeholder="description" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <button>{this.props.subnet.subnet_key === "" ? "Register" : "Update"}</button>
+          <textarea name="description" value={this.props.subnet.description} placeholder="Description" onChange={e => this.handleChange(e)} />
+          <div className="button-actions">
+            <button>{this.props.subnet.subnet_key === "" ? "Register" : "Update"}</button>
+            <button className="cancel-button" onClick={() => this.cancelOperation()}>Cancel</button>
+          </div>
         </div>
       </form>
     )

@@ -24,13 +24,11 @@ class Login extends React.Component {
     return (
       <div className="container-middle">
       <form className="form-middle" onSubmit={e => this.handleLogin(e)}>
-        <label for="email" className="login-label">Email:</label>
+        <label htmlFor="email" className="login-label">Email:</label>
         <input type="text" name="email" className="login-input" placeholder="email" />
-        <label for="password" className="login-label">Password:</label>
+        <label htmlFor="password" className="login-label">Password:</label>
         <input type="password" name="password" className="login-input" placeholder="password" />
-        <div>
-          <button>Sign in</button>
-        </div>
+        <button className="login-button">Sign in</button>
       </form>
       </div>
     )

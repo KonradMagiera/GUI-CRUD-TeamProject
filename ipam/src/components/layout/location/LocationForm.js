@@ -24,26 +24,23 @@ class LocationForm extends React.Component {
     this.props.setLocationItem(name, value)
   }
 
+  cancelOperation = () => {
+    this.props.history.push("/location");
+  }
+
   render() {
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
-        <div>
+        <div className="register-box">
           <h2>{this.props.location.location_key === "" ? "Register location" : "Edit location"}</h2>
-        </div>
-        <div>
           <label htmlFor="location">Location</label>
-        </div>
-        <div>
-          <input type="text" name="location" value={this.props.location.location} placeholder="location" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
+          <input type="text" name="location" value={this.props.location.location} placeholder="Location" onChange={e => this.handleChange(e)} />
           <label htmlFor="description">Description</label>
-        </div>
-        <div>
-          <textarea name="description" value={this.props.location.description} placeholder="description" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <button>{this.props.location.location_key === "" ? "Register" : "Update"}</button>
+          <textarea name="description" value={this.props.location.description} placeholder="Description" onChange={e => this.handleChange(e)} />
+          <div className="button-actions">
+            <button>{this.props.location.location_key === "" ? "Register" : "Update"}</button>
+            <button className="cancel-button" onClick={() => this.cancelOperation()}>Cancel</button>
+          </div>
         </div>
       </form>
     )

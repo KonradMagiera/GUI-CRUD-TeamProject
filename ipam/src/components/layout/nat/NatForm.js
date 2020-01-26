@@ -27,44 +27,29 @@ class NatForm extends React.Component {
     this.props.setNatItem(name, value)
   }
 
+  cancelOperation = () => {
+    this.props.history.push("/nat");
+  }
+
   render() {
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
-        <div>
-          <h2>{this.props.nat.nat_key === "" ? "Register NAT" : "Edit NAT"}</h2>
-        </div>
-        <div>
-          <label htmlFor="name">Name</label>
-        </div>
-        <div>
-          <input type="text" name="name" value={this.props.nat.name} placeholder="name" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <label htmlFor="device">Device</label>
-        </div>
-        <div>
-          <input type="text" name="device" value={this.props.nat.device} placeholder="device" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-        </div>
-        <div>
-          <input type="text" name="description" value={this.props.nat.description} placeholder="description" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <label htmlFor="ip_external">External IP</label>
-        </div>
-        <div>
-          <input type="text" name="ip_external" value={this.props.nat.ip_external} placeholder="ip_external" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <label htmlFor="internal_subnet">Internal subnet</label>
-        </div>
-        <div>
-          <input type="text" name="internal_subnet" value={this.props.nat.internal_subnet} placeholder="internal_subnet" onChange={e => this.handleChange(e)} />
-        </div>
-        <div>
-          <button>{this.props.nat.nat_key === "" ? "Register" : "Update"}</button>
+        <div className="register-box">
+            <h2>{this.props.nat.nat_key === "" ? "Register NAT" : "Edit NAT"}</h2>
+            <label htmlFor="name">Name</label>
+            <input type="text" name="name" value={this.props.nat.name} placeholder="Name" onChange={e => this.handleChange(e)} />
+            <label htmlFor="device">Device</label>
+            <input type="text" name="device" value={this.props.nat.device} placeholder="Device" onChange={e => this.handleChange(e)} />
+            <label htmlFor="description">Description</label>
+            <input type="text" name="description" value={this.props.nat.description} placeholder="Description" onChange={e => this.handleChange(e)} />
+            <label htmlFor="ip_external">External IP</label>
+            <input type="text" name="ip_external" value={this.props.nat.ip_external} placeholder="External IP" onChange={e => this.handleChange(e)} />
+            <label htmlFor="internal_subnet">Internal subnet</label>
+            <input type="text" name="internal_subnet" value={this.props.nat.internal_subnet} placeholder="Internal subnet" onChange={e => this.handleChange(e)} />
+            <div className="button-actions">
+              <button>{this.props.nat.nat_key === "" ? "Register" : "Update"}</button>
+              <button className="cancel-button" onClick={() => this.cancelOperation()}>Cancel</button>
+            </div>
         </div>
       </form>
     )

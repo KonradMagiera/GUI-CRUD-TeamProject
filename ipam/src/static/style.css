@@ -12,7 +12,8 @@ html, body {
   left: 0;
   bottom: 0;
   width: 200px; 
-  background-color: #2d7cbd;
+  /*background-color: #2d7cbd;*/
+  background-image: linear-gradient(0deg, #045832 0%, #232a85 100%); /*#045832 #232a85 */
 } 
 /*
 background-color: #333333;
@@ -55,7 +56,10 @@ background-color: #333333;
   font-size: 22px;
   margin: 5px 8px 5px 8px;
   background-color: #35afe7;
+  /*background-color: #2c8cff;*/
   border: 0;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 /* 
 background-color: #252526;
@@ -116,6 +120,7 @@ color: rgb(200, 221, 228);
   background-color: #78db64;
   border: 0;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .container-middle {
@@ -124,7 +129,8 @@ color: rgb(200, 221, 228);
   right: 0px;
   top: 0px;
   bottom: 0px;
-  background-color: #088dc2;
+  /*background-color: #088dc2;*/
+  background-image: linear-gradient(0deg, #045832 0%, #232a85 100%); /*#045832 #232a85 */
 }
 
 .form-middle {
@@ -141,19 +147,42 @@ color: rgb(200, 221, 228);
 }
 
 .login-input {
+  width: 100%;
   border-radius: 5px;
   border: 1px solid black;
   padding: 5px 0px 5px 0px;
   font-size: 26px;
 }
 
+.login-button {
+  color: white;
+  background: #2c8cff;
+  /*background-color: #35afe7;*/
+  width: 100%;
+  border: 0px;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: inline-block;  
+  font-size: 20px;
+}
+
+.login-button:hover {
+  background-color: #4dbbee;
+  cursor: pointer;
+}
+
+
 .middle {
   text-align: center;
 }
 
 table {
-  table-layout: fixed;
-  width: 100%;
+  table-layout: inherit;
+  /*width: 100%;*/
+  margin-left: 10px;
   border-collapse: collapse;
   word-wrap: break-word;
 }
@@ -173,4 +202,90 @@ th:nth-last-child(2) {
 }
 th, tr {
   border: 1px solid black;
+  padding: 5px;
+}
+
+.register-box {
+  display: block;
+  margin: auto;
+  max-width: 400px;
+}
+
+.register-box h2 {
+  /*margin: 0 0 30px;
+  padding: 0;*/
+  color: black;
+  text-align: center;
+  font-size: larger;
+}
+
+.register-box label {
+  display: inline-block;
+  width: 100%;
+  color: black;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.register-box input[type=text] {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 0px 5px 0px;
+  font-size: 15px;
+  text-indent: 5px;
+}
+
+.register-box button {
+  color: black;
+  /*background: #2c8cff;*/
+  background-color: #35afe7;
+  /*width: 100%;*/  
+  border: 0px;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: inline-block;  
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.register-box button:hover {
+  background-color: #41c1fc;
+  cursor: pointer;
+}
+
+.register-box .radio-box {
+  display: flex;
+  float: left;
+  margin: 0px 50px 0px 0px;
+}
+
+.register-box .radio-box [type=radio] {
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-box textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 0px 5px 0px;
+  font-size: 15px;
+  text-indent: 5px;
+}
+
+.register-box .button-actions {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: center; 
+  /*padding:20px;*/
+}
+
+.register-box .button-actions .cancel-button {
+  background-color: #f30606;
 }
