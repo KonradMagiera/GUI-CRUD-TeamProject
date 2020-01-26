@@ -9,6 +9,8 @@ import { login } from '../../actions'
 class Login extends React.Component {
   handleLogin(e) {
     e.preventDefault()
+    document.body.style.cursor='wait';
+  
     const email = e.target.email.value
     const password = e.target.password.value
     Firebase.auth()

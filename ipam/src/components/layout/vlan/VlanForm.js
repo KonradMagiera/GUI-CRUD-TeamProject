@@ -56,7 +56,7 @@ class VlanForm extends React.Component {
     }
 
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={(e) => this.handleSubmit(e)} className="right">
         <div className="register-box">
           <h2>{this.props.vlan.vlan_key === "" ? "Register VLAN" : "Edit VLAN"}</h2>
           <label htmlFor="id_vlan">ID VLAN</label>

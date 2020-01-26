@@ -39,13 +39,13 @@ class SubnetForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={(e) => this.handleSubmit(e)} className="right">
         <div className="register-box">
           <h2>{this.props.subnet.subnet_key === "" ? "Register subnet" : "Edit subnet"}</h2>
           <label htmlFor="ip_address">IP address</label>
-          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="IP address" onChange={e => this.handleChange(e)} />
+          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="1.1.1.1" onChange={e => this.handleChange(e)} />
           <label htmlFor="netmask">Netmask</label>
-          <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="Netmask" onChange={e => this.handleChange(e)} />
+          <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
           <input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="VLAN" onChange={e => this.handleChange(e)} />
           <label htmlFor="nameservers">Nameservers</label>

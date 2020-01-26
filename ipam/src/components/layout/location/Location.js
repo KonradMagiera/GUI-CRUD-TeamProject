@@ -20,8 +20,8 @@ class Location extends React.Component {
       locationItems = Object.keys(this.props.allLocations).map(key => {
         return (
           <tr key={key}>
-            <th>{this.props.allLocations[key].location}</th>
-            <th>{this.props.allLocations[key].description}</th>
+            <th><div>{this.props.allLocations[key].location}</div></th>
+            <th><div>{this.props.allLocations[key].description}</div></th>
             <th><Link to="/edit_location" onClick={() => {
               this.props.setLocation({
                 location_key: key,
@@ -38,7 +38,7 @@ class Location extends React.Component {
     }
 
     return (
-      <div>
+      <div className="right">
         <Link to="/register_location"><button className="register">Register Location</button></Link>
         <Table tabledef={["Location", "Description"]} items={locationItems} />
       </div>

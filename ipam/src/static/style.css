@@ -180,8 +180,8 @@ color: rgb(200, 221, 228);
 }
 
 table {
-  table-layout: inherit;
-  /*width: 100%;*/
+  table-layout: fixed;
+  width: calc(100% - 20px);
   margin-left: 10px;
   border-collapse: collapse;
   word-wrap: break-word;
@@ -203,6 +203,12 @@ th:nth-last-child(2) {
 th, tr {
   border: 1px solid black;
   padding: 5px;
+}
+th div {
+  height: 60px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .register-box {
@@ -257,6 +263,10 @@ th, tr {
   cursor: pointer;
 }
 
+.register-box button:active {
+  background-color: #088dc2;
+}
+
 .register-box .radio-box {
   display: flex;
   float: left;
@@ -288,4 +298,10 @@ th, tr {
 
 .register-box .button-actions .cancel-button {
   background-color: #f30606;
+}
+.register-box .button-actions .cancel-button:hover {
+  background-color: #ff3939;
+}
+.register-box .button-actions .cancel-button:active {
+  background-color: #db0000;
 }

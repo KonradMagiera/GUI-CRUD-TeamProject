@@ -18,11 +18,11 @@ class Nat extends React.Component {
       natItems = Object.keys(this.props.allNats).map(key => {
         return (
           <tr key={key}>
-            <th>{this.props.allNats[key].name}</th>
-            <th>{this.props.allNats[key].device}</th>
-            <th>{this.props.allNats[key].ip_external}</th>
-            <th>{this.props.allNats[key].internal_subnet}</th>
-            <th>{this.props.allNats[key].description}</th>
+            <th><div>{this.props.allNats[key].name}</div></th>
+            <th><div>{this.props.allNats[key].device}</div></th>
+            <th><div>{this.props.allNats[key].ip_external}</div></th>
+            <th><div>{this.props.allNats[key].internal_subnet}</div></th>
+            <th><div>{this.props.allNats[key].description}</div></th>
             <th><Link to="/edit_nat" onClick={() => {
               this.props.setNat({
                 nat_key: key,
@@ -41,7 +41,7 @@ class Nat extends React.Component {
       })
     }
     return (
-      <div>
+      <div className="right">
         <Link to="/register_nat"><button className="register">Register NAT</button></Link>
         <Table tabledef={["Name", "Device", "External IP", "Internal subnet", "Description"]} items={natItems} />
       </div>

@@ -18,15 +18,15 @@ class Subnet extends React.Component {
       subnetItems = Object.keys(this.props.allSubnets).map(key => {
         return (
           <tr key={key}>
-            <th>{this.props.allSubnets[key].ip_address}</th>
-            <th>{this.props.allSubnets[key].netmask}</th>
-            <th>{this.props.allSubnets[key].ip_assignment}</th>
-            <th>{this.props.allSubnets[key].is_routable ? "Yes" : "No"}</th>
-            <th>{this.props.allSubnets[key].location}</th>
-            <th>{this.props.allSubnets[key].nameservers}</th>
-            <th>{this.props.allSubnets[key].public_or_dmz}</th>
-            <th>{this.props.allSubnets[key].vlan}</th>
-            <th>{this.props.allSubnets[key].description}</th>
+            <th><div>{this.props.allSubnets[key].ip_address}</div></th>
+            <th><div>{this.props.allSubnets[key].netmask}</div></th>
+            <th><div>{this.props.allSubnets[key].ip_assignment}</div></th>
+            <th><div>{this.props.allSubnets[key].is_routable ? "Yes" : "No"}</div></th>
+            <th><div>{this.props.allSubnets[key].location}</div></th>
+            <th><div>{this.props.allSubnets[key].nameservers}</div></th>
+            <th><div>{this.props.allSubnets[key].public_or_dmz}</div></th>
+            <th><div>{this.props.allSubnets[key].vlan}</div></th>
+            <th><div>{this.props.allSubnets[key].description}</div></th>
             <th><Link to="/edit_subnet" onClick={() => {
               this.props.setSubnet({
                 subnet_key: key,
@@ -49,7 +49,7 @@ class Subnet extends React.Component {
       })
     }
     return (
-      <div>
+      <div className="right">
         <Link to="/register_subnet"><button className="register">Register Subnet</button></Link>
         <Table tabledef={["IP address", "Netmask", "IP assignment", "Is routable", "Location", "Nameservers", "Type", "Vlan", "Description"]} items={subnetItems} />
       </div>

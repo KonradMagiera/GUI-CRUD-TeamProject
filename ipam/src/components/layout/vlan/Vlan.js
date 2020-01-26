@@ -25,9 +25,9 @@ class Vlan extends React.Component {
         }
         return (
           <tr key={key}>
-            <th>{this.props.allVlans[key].id_vlan}</th>
-            <th>{vlanSubnets}</th>
-            <th>{this.props.allVlans[key].description}</th>
+            <th><div>{this.props.allVlans[key].id_vlan}</div></th>
+            <th><div>{vlanSubnets}</div></th>
+            <th><div>{this.props.allVlans[key].description}</div></th>
             <th><Link to="/edit_vlan" onClick={() => {
               this.props.setVlan({
                 vlan_key: key,
@@ -45,7 +45,7 @@ class Vlan extends React.Component {
     }
 
     return (
-      <div>
+      <div className="right">
         <Link to="/register_vlan"><button className="register">Register VLAN</button></Link>
         <Table tabledef={["ID VLAN", "Subnets", "Description"]} items={vlanItems} />
       </div>

@@ -33,7 +33,7 @@ class NatForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={(e) => this.handleSubmit(e)} className="right">
         <div className="register-box">
             <h2>{this.props.nat.nat_key === "" ? "Register NAT" : "Edit NAT"}</h2>
             <label htmlFor="name">Name</label>

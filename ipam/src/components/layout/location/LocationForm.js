@@ -30,7 +30,7 @@ class LocationForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={(e) => this.handleSubmit(e)}  className="right">
         <div className="register-box">
           <h2>{this.props.location.location_key === "" ? "Register location" : "Edit location"}</h2>
           <label htmlFor="location">Location</label>
