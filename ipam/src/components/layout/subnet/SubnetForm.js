@@ -1,14 +1,15 @@
 import React from 'react';
 import { setSubnetItem, resetSubnet, addItem, updateItem } from '../../../actions'
 import { connect } from 'react-redux'
+import { validateIPaddress, validateNetmask } from '../../../utils/validation'
 
 class SubnetForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
     var subnetTmp = {
-      "ip_address": this.props.subnet.ip_address,
-      "netmask": this.props.subnet.netmask,
+      "ip_address": this.props.subnet.ip_address === "" ? "127.0.0.1" : this.props.subnet.ip_address,
+      "netmask": this.props.subnet.netmask === "" ? "255.255.0.0" : this.props.subnet.netmask,
       "vlan": this.props.subnet.vlan,
       "nameservers": this.props.subnet.nameservers,
       "location": this.props.subnet.location,
@@ -31,6 +32,21 @@ class SubnetForm extends React.Component {
     type === "checkbox"
       ? this.props.setSubnetItem(name, checked)
       : this.props.setSubnetItem(name, value)
+
+    if (name === "ip_address") {
+      if (validateIPaddress(value)) {
+        e.target.style.borderColor = "black"
+      } else {
+        e.target.style.borderColor = "red"
+      }
+    }
+    if (name === "netmask") {
+      if (validateNetmask(value)) {
+        e.target.style.borderColor = "black"
+      } else {
+        e.target.style.borderColor = "red"
+      }
+    }
   }
 
   cancelOperation = () => {
@@ -43,7 +59,7 @@ class SubnetForm extends React.Component {
         <div className="register-box">
           <h2>{this.props.subnet.subnet_key === "" ? "Register subnet" : "Edit subnet"}</h2>
           <label htmlFor="ip_address">IP address</label>
-          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="1.1.1.1" onChange={e => this.handleChange(e)} />
+          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="127.0.0.1" onChange={e => this.handleChange(e)} />
           <label htmlFor="netmask">Netmask</label>
           <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
@@ -82,6 +98,7 @@ class SubnetForm extends React.Component {
     )
   }
 }
+
 
 const mapStateToProps = ({ subnetReducer }) => ({
   subnet: subnetReducer
