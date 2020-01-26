@@ -305,3 +305,8 @@ th div {
 .register-box .button-actions .cancel-button:active {
   background-color: #db0000;
 }
+
+.register-box .h3 {
+  font-size: 20px;
+  font-weight: bold;
+}

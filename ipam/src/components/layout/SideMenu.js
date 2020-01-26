@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import subnet from '../../static/subnet.png'
 import vlan from '../../static/vlan.png'
 import location from '../../static/location.png'
+import host from '../../static/host.png'
+
 function SideMenu() {
   return (
     <div className="left">
@@ -21,6 +23,10 @@ function SideMenu() {
 
         <Link to="/nat">
           <button className="menuItem"><img src={vlan} alt="NAT" className="img-sidemenu"/>NAT</button>
+        </Link>
+
+        <Link to="/host">
+          <button className="menuItem"><img src={host} alt="Host" className="img-sidemenu"/>Host</button>
         </Link>
       </nav>
     </div>
