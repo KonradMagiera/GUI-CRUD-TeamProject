@@ -44,7 +44,7 @@ class Nat extends React.Component {
     return (
       <div className="right">
         <Link to="/register_nat"><button className="register">Register NAT</button></Link>
-        <Table tabledef={["Name", "Device", "External IP", "Internal subnet", "Description"]} items={natItems} />
+        <Table tabledef={["Name", "Device", "External IP", "Internal subnet", "Description"]} items={natItems} len={natItems ? natItems.length : 1 }/>
       </div>
     )
   }
