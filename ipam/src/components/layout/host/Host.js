@@ -49,7 +49,7 @@ class Host extends React.Component {
     }
     return (
       <div className="right">
-        <Link to="/register_host"><button className="register">Register host</button></Link>
+        <Link to="/register_host"><button className="register">Register Host</button></Link>
         <Table tabledef={["IP", "Hostname", "MAC address", "Gateway", "Owner", "Device description", "Location description", "Description"]} items={hostItems} />
       </div>
     )

@@ -72,7 +72,7 @@ class SubnetForm extends React.Component {
           <label htmlFor="public_or_dmz">Public / DMZ</label>
           <div className="radio-box">
             <input type="radio" value="Public" name="public_or_dmz" id="radio_public" checked={this.props.subnet.public_or_dmz === "Public"} onChange={e => this.handleChange(e)} />
-            <label htmlFor="radio_public">Static</label>
+            <label htmlFor="radio_public">Public</label>
           </div>
           <div className="radio-box">
             <input type="radio" value="DMZ" id="radio_dmz" name="public_or_dmz" checked={this.props.subnet.public_or_dmz === "DMZ"} onChange={e => this.handleChange(e)} />
