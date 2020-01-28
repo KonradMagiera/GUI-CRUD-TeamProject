@@ -21,10 +21,21 @@ class Table extends React.Component {
         <th key={id}>{id}</th>
       )
     })
-    console.log(this.props.len)
-    const difference = this.props.len % 10 === 0 ? 0 : (10 - this.props.len % 10)
-    const pageCount = (this.props.len + difference ) / 10
-    console.log(pageCount)
+    const len = this.props.items ? this.props.items.length : 1
+    const difference = len % 8 === 0 ? 0 : (8 - len % 8)
+    const pageCount = (len + difference) / 8
+    var limitedItems = this.props.items ? this.props.items.slice((this.state.currentPage - 1) * 8, (this.state.currentPage - 1) * 8 + 8) : []
+
+    const tableItem = tableRows.map(key => {
+      return <th key={key}><div /></th>
+    })
+    while (limitedItems.length !== 8) {
+      limitedItems = [...limitedItems,
+      <tr>
+        {tableItem}
+      </tr>]
+    }
+
     return (
       <div>
         <table>
@@ -32,13 +43,12 @@ class Table extends React.Component {
             <tr>
               {tabledef}
             </tr>
-            {this.props.items}
+            {limitedItems}
           </tbody>
         </table>
-        {this.state.currentPage === 1 ? null : <button onClick={() => this.setPage(this.state.currentPage - 1)}>Prev</button>}   
+        {this.state.currentPage === 1 ? null : <button onClick={() => this.setPage(this.state.currentPage - 1)}>Prev</button>}
         <label>Current page: {this.state.currentPage}</label>
         {this.state.currentPage === pageCount ? null : <button onClick={() => this.setPage(this.state.currentPage + 1)}>Next</button>}
-        
       </div>
     )
   }

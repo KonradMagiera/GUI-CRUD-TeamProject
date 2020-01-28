@@ -40,7 +40,7 @@ class Location extends React.Component {
     return (
       <div className="right">
         <Link to="/register_location"><button className="register">Register Location</button></Link>
-        <Table tabledef={["Location", "Description"]} items={locationItems} len={locationItems ? locationItems.length : 1 }/>
+        <Table tabledef={["Location", "Description"]} items={locationItems} />
       </div>
     )
   }
