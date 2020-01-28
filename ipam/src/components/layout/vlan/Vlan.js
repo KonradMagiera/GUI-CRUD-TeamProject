@@ -19,9 +19,9 @@ class Vlan extends React.Component {
     if (this.props.allVlans !== null) {
       vlanItems = Object.keys(this.props.allVlans).map(key => {
         var vlanSubnets = null;
-        if (this.props.allVlans[key].subnets !== undefined) {
-          vlanSubnets = Object.keys(this.props.allVlans[key].subnets).map(subnetKey => {
-            return (<div key={subnetKey}>{this.props.allVlans[key].subnets[subnetKey]}</div>)
+        if (this.props.allVlans[key].subnet !== undefined) {
+          vlanSubnets = Object.keys(this.props.allVlans[key].subnet).map(subnetKey => {
+            return (<div key={subnetKey}>{this.props.allVlans[key].subnet[subnetKey]}</div>)
           })
         }
         return (
@@ -34,7 +34,7 @@ class Vlan extends React.Component {
                 vlan_key: key,
                 id_vlan: this.props.allVlans[key].id_vlan,
                 description: this.props.allVlans[key].description,
-                subnets: this.props.allVlans[key].subnets ? this.props.allVlans[key].subnets : null,
+                subnet: this.props.allVlans[key].subnet ? this.props.allVlans[key].subnet : null,
               })
 
             }}><img src={edit} alt="Edit" className="img-table"/></Link>

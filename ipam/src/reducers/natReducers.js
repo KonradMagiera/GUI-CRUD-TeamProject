@@ -1,15 +1,16 @@
-import { ADD_NAT_INFO, RESET_NAT, SET_NAT, DELETE_NAT_INFO, SET_NAT_ITEM } from "../actions/nat"
+import { ADD_NAT_INFO, RESET_NAT, SET_NAT, DELETE_NAT_INFO, SET_NAT_ITEM, ADD_NAT_DEVICE } from "../actions/nat"
 
 const initialNat = {
     nat_key: "",
     name: "",
-    device: "",
+    //device: "",
+    device: {},
     description: "",
     ip_external: "",
     internal_subnet: ""
   }
   
-  export function natReducer(state = initialNat, { type, name, value, nat }) {
+  export function natReducer(state = initialNat, { type, name, value, nat, device_key, device_name }) {
     Object.freeze(state)
     switch (type) {
       case SET_NAT:
@@ -18,6 +19,13 @@ const initialNat = {
         return ({
           ...state,
           [name]: value})
+      case ADD_NAT_DEVICE:
+        return ({
+          ...state,
+          device: {
+            [device_key]: device_name
+          }
+        })
       case RESET_NAT:
         return initialNat
       default:

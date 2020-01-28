@@ -13,7 +13,7 @@ class VlanForm extends React.Component {
     var vlanTmp = {
       "id_vlan": this.props.vlan.id_vlan,
       "description": this.props.vlan.description,
-      "subnets": this.props.vlan.subnets,
+      "subnet": this.props.vlan.subnet,
     }
     if (this.props.vlan.vlan_key === "") {
       addItem("vlans", vlanTmp)
@@ -30,7 +30,6 @@ class VlanForm extends React.Component {
         var subnet_key = e.target.value
         var subnet_ip_address = this.props.allSubnets[subnet_key].ip_address
         this.props.addVlanSubnet(subnet_key, subnet_ip_address)
-        document.getElementById("chosen_subnets").textContent += subnet_ip_address + '\n' //chwilowo zrobione tak żeby zobaczyć jakie subnety sa dodawane
       }
     } else {
       const { name, value } = e.target
@@ -64,11 +63,10 @@ class VlanForm extends React.Component {
           <label htmlFor="description">Description</label>
           <textarea name="description" value={this.props.vlan.description} placeholder="Description" onChange={e => this.handleChange(e)} />
           <label htmlFor="subnets">Subnets</label>
-          <select name="subnets" value="" onChange={e => this.handleChange(e)}>
+          <select name="subnets" onChange={e => this.handleChange(e)}>
             <option value="">--Subnet--</option>
             {subnetItems}
           </select>
-          <textarea id="chosen_subnets" />
           <div className="button-actions">
             <button>{this.props.vlan.vlan_key === "" ? "Register" : "Update"}</button>
             <button className="cancel-button" onClick={() => this.cancelOperation()}>Cancel</button>

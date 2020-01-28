@@ -5,7 +5,8 @@ const initialVlan = {
     id_vlan: "",
     description: "",
     vlan: "",
-    subnets: {} //to bedzie chyba jakos inaczej
+    //subnets: {} to bedzie chyba jakos inaczej
+    subnet: {}
   }
   
   export function vlanReducer(state = initialVlan, { type, name, value, vlan, subnet_key, subnet_ip_address }) {
@@ -14,11 +15,17 @@ const initialVlan = {
       case SET_VLAN:
         return vlan
       case ADD_VLAN_SUBNET:
-        var prevSubnets = state["subnets"]
+        /*var prevSubnets = state["subnets"]
         return ({
           ...state,
           subnets: {
             ...prevSubnets,
+            [subnet_key]: subnet_ip_address
+          }
+        })*/
+        return ({
+          ...state,
+          subnet: {
             [subnet_key]: subnet_ip_address
           }
         })

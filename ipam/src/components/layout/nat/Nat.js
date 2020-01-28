@@ -17,10 +17,16 @@ class Nat extends React.Component {
     var natItems = null
     if (this.props.allNats !== null) {
       natItems = Object.keys(this.props.allNats).map(key => {
+        var natDevices = null;
+        if (this.props.allNats[key].device !== undefined) {
+          natDevices = Object.keys(this.props.allNats[key].device).map(deviceKey => {
+            return (<div key={deviceKey}>{this.props.allNats[key].device[deviceKey]}</div>)
+          })
+        }
         return (
           <tr key={key}>
             <th><div>{this.props.allNats[key].name}</div></th>
-            <th><div>{this.props.allNats[key].device}</div></th>
+            <th><div>{natDevices}</div></th>
             <th><div>{this.props.allNats[key].ip_external}</div></th>
             <th><div>{this.props.allNats[key].internal_subnet}</div></th>
             <th><div>{this.props.allNats[key].description}</div></th>
@@ -28,7 +34,8 @@ class Nat extends React.Component {
               this.props.setNat({
                 nat_key: key,
                 name: this.props.allNats[key].name,
-                device: this.props.allNats[key].device,
+                //device: this.props.allNats[key].device,
+                device: this.props.allNats[key].device ? this.props.allNats[key].device : null,
                 description: this.props.allNats[key].description,
                 ip_external: this.props.allNats[key].ip_external,
                 internal_subnet: this.props.allNats[key].internal_subnet,

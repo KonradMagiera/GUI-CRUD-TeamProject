@@ -3,7 +3,7 @@ import { setSubnetItem, resetSubnet, setSubnet, addSubnetInfo, deleteSubnetInfo 
 import { setVlanItem, resetVlan, setVlan, addVlanInfo, deleteVlanInfo, addVlanSubnet } from "./vlan"
 import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo } from './location'
 import { fetchItems, deleteItem, addItem, updateItem } from './firebase'
-import { setNatItem, resetNat, setNat, addNatInfo, deleteNatInfo } from "./nat"
+import { setNatItem, resetNat, setNat, addNatInfo, deleteNatInfo, addNatDevice } from "./nat"
 import { setHostItem, resetHost, setHost, addHostInfo, deleteHostInfo } from "./host"
 
 export {
@@ -12,6 +12,6 @@ export {
     setVlanItem, resetVlan, setVlan, addVlanInfo, deleteVlanInfo, addVlanSubnet,
     setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo,
     fetchItems, deleteItem, addItem, updateItem,
-    setNatItem, resetNat, setNat, addNatInfo, deleteNatInfo,
+    setNatItem, resetNat, setNat, addNatInfo, deleteNatInfo, addNatDevice,
     setHostItem, resetHost, setHost, addHostInfo, deleteHostInfo
 }

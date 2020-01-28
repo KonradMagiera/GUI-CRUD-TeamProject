@@ -1,8 +1,12 @@
 import React from 'react';
-import { setNatItem, resetNat, addItem, updateItem } from '../../../actions'
+import { setNatItem, resetNat, addNatDevice, addItem, fetchItems, updateItem } from '../../../actions'
+import { addHostInfo, resetHost } from '../../../actions'
 import { connect } from 'react-redux'
 
 class NatForm extends React.Component {
+  componentDidMount() {
+    fetchItems("hosts", this.props.addHostInfo)
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +35,35 @@ class NatForm extends React.Component {
     this.props.history.push("/nat");
   }
 
+  handleChange = e => {
+    if (e.target.name === "devices") {
+      if (e.target.value !== "") {
+        var host_key = e.target.value
+        var host_name = this.props.allHosts[host_key].hostname
+        this.props.addNatDevice(host_key, host_name)
+      }
+    } else {
+      const { name, value } = e.target
+      this.props.setNatItem(name, value)
+    }
+  }
+
+  //<input type="text" name="device" value={this.props.nat.device} placeholder="Device" onChange={e => this.handleChange(e)} />
+
   render() {
+    this.props.resetHost()
+    var hostItems = null
+    if (this.props.allHosts !== null) {
+      hostItems = Object.keys(this.props.allHosts).map(key => {
+        return (
+          <option value={key} key={key}>
+            {this.props.allHosts[key].hostname}
+          </option>
+        )
+      })
+    }
+
+
     return (
       <form onSubmit={(e) => this.handleSubmit(e)} className="right">
         <div className="register-box">
@@ -39,7 +71,10 @@ class NatForm extends React.Component {
             <label htmlFor="name">Name</label>
             <input type="text" name="name" value={this.props.nat.name} placeholder="Name" onChange={e => this.handleChange(e)} />
             <label htmlFor="device">Device</label>
-            <input type="text" name="device" value={this.props.nat.device} placeholder="Device" onChange={e => this.handleChange(e)} />
+            <select name="devices" onChange={e => this.handleChange(e)}>
+              <option value="">--Device--</option>
+              {hostItems}
+          </select>
             <label htmlFor="description">Description</label>
             <input type="text" name="description" value={this.props.nat.description} placeholder="Description" onChange={e => this.handleChange(e)} />
             <label htmlFor="ip_external">External IP</label>
@@ -56,8 +91,9 @@ class NatForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ natReducer }) => ({
-  nat: natReducer
+const mapStateToProps = ({ natReducer, allHostsReducer }) => ({
+  nat: natReducer,
+  allHosts: allHostsReducer
 })
 
-export default connect(mapStateToProps, { setNatItem, resetNat })(NatForm)
+export default connect(mapStateToProps, { setNatItem, resetNat, resetHost, addHostInfo, addNatDevice })(NatForm)
