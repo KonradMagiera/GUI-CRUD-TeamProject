@@ -1,12 +1,20 @@
 import React from 'react';
-import { setSubnetItem, resetSubnet, addSubnetVlan, addItem, updateItem, fetchItems } from '../../../actions'
+import { setSubnetItem, resetSubnet, addSubnetVlan, deleteSubnetVlan, addItem, updateItem, fetchItems } from '../../../actions'
 import { addVlanInfo, resetVlan } from '../../../actions'
 import { connect } from 'react-redux'
 import { validateIPaddress, validateNetmask } from '../../../utils/validation'
 
 class SubnetForm extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      selectVal: ""
+    }
+  }
+
   componentDidMount() {
     fetchItems("vlans", this.props.addVlanInfo)
+    this.setValue()
   }
 
   handleSubmit(e) {
@@ -37,6 +45,10 @@ class SubnetForm extends React.Component {
         var vlan_key = e.target.value
         var id_vlan = this.props.allVlans[vlan_key].id_vlan
         this.props.addSubnetVlan(vlan_key, id_vlan)
+        this.setState({selectVal: vlan_key})
+      } else {
+        this.props.deleteSubnetVlan()
+        this.setState({selectVal: ""})
       }
     }
 
@@ -65,6 +77,13 @@ class SubnetForm extends React.Component {
     this.props.history.push("/subnet");
   }
 
+  setValue = () => {
+    if(this.props.subnet.vlan){
+      const key = Object.keys(this.props.subnet.vlan)
+      this.setState({selectVal: key[0]})
+    }
+  }
+
   render() {
     this.props.resetVlan()
     var vlanItems = null
@@ -77,7 +96,6 @@ class SubnetForm extends React.Component {
         )
       })
     }
-    //<input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="VLAN" onChange={e => this.handleChange(e)} />
 
     return (
       <form onSubmit={(e) => this.handleSubmit(e)} className="right">
@@ -88,7 +106,7 @@ class SubnetForm extends React.Component {
           <label htmlFor="netmask">Netmask</label>
           <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
-          <select name="vlans" onChange={e => this.handleChange(e)}>
+          <select value={this.state.selectVal} name="vlans" onChange={e => this.handleChange(e)}>
             <option value="">--VLAN--</option>
             {vlanItems}
           </select>
@@ -133,4 +151,4 @@ const mapStateToProps = ({ subnetReducer, allVlansReducer }) => ({
   allVlans: allVlansReducer
 })
 
-export default connect(mapStateToProps, { setSubnetItem, resetSubnet, addVlanInfo, resetVlan, addSubnetVlan })(SubnetForm)
+export default connect(mapStateToProps, { setSubnetItem, resetSubnet, addVlanInfo, resetVlan, addSubnetVlan, deleteSubnetVlan })(SubnetForm)

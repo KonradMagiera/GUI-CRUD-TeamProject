@@ -1,4 +1,4 @@
-import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO, DELETE_SUBNET_INFO, ADD_SUBNET_VLAN } from "../actions/subnet"
+import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO, DELETE_SUBNET_INFO, ADD_SUBNET_VLAN, DELETE_SUBNET_VLAN } from "../actions/subnet"
 
 
 const initialSubnet = {
@@ -30,6 +30,11 @@ const initialSubnet = {
           vlan: {
             [vlan_key]: id_vlan
           }
+        })
+      case DELETE_SUBNET_VLAN:
+        return ({
+          ...state,
+          vlan: {}
         })
       case RESET_SUBNET:
         return initialSubnet
