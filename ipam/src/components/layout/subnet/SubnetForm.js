@@ -5,13 +5,6 @@ import { connect } from 'react-redux'
 import { validateIPaddress, validateNetmask } from '../../../utils/validation'
 
 class SubnetForm extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      selectVal: ""
-    }
-  }
-
   componentDidMount() {
     fetchItems("vlans", this.props.addVlanInfo)
     this.setValue()
@@ -45,10 +38,8 @@ class SubnetForm extends React.Component {
         var vlan_key = e.target.value
         var id_vlan = this.props.allVlans[vlan_key].id_vlan
         this.props.addSubnetVlan(vlan_key, id_vlan)
-        this.setState({selectVal: vlan_key})
       } else {
         this.props.deleteSubnetVlan()
-        this.setState({selectVal: ""})
       }
     }
 
@@ -80,7 +71,9 @@ class SubnetForm extends React.Component {
   setValue = () => {
     if(this.props.subnet.vlan){
       const key = Object.keys(this.props.subnet.vlan)
-      this.setState({selectVal: key[0]})
+      var x = document.getElementsByName("vlans")
+      x = x[0]
+      x.value = key[0]
     }
   }
 
@@ -106,7 +99,7 @@ class SubnetForm extends React.Component {
           <label htmlFor="netmask">Netmask</label>
           <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
-          <select value={this.state.selectVal} name="vlans" onChange={e => this.handleChange(e)}>
+          <select name="vlans" onChange={e => this.handleChange(e)}>
             <option value="">--VLAN--</option>
             {vlanItems}
           </select>
