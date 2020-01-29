@@ -40,7 +40,7 @@ class SubnetForm extends React.Component {
       }
 
       if(!validateNetmask(this.props.subnet.netmask)) {
-        var wrongField = document.getElementById("netmask")
+        wrongField = document.getElementById("netmask")
         wrongField.style.borderColor = "red"
       }
     }

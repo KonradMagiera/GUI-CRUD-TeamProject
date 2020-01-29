@@ -35,7 +35,7 @@ class HostForm extends React.Component {
       }
 
       if(!validateMACAddress(this.props.mac_address)) {
-        var wrongField = document.getElementById("mac_address")
+        wrongField = document.getElementById("mac_address")
         wrongField.style.borderColor = "red"
       }
     }
