@@ -31,7 +31,7 @@ class Table extends React.Component {
     })
     while (limitedItems.length !== 8) {
       limitedItems = [...limitedItems,
-      <tr>
+      <tr key={limitedItems.length}>
         {tableItem}
       </tr>]
     }

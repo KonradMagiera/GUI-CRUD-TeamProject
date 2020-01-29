@@ -72,6 +72,11 @@ background-color: #333333;
   background-color: rgb(2, 136, 199);
 }
 
+.bottom {
+  position: absolute;
+  bottom: 5px
+}
+
 .img-sidemenu {
   position: absolute;
   height: 25px;
