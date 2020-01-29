@@ -4,7 +4,6 @@ import subnet from '../../static/subnet.png'
 import vlan from '../../static/vlan.png'
 import location from '../../static/location.png'
 import host from '../../static/host.png'
-import { fetchAll } from '../../actions/index'
 
 function SideMenu() {
   return (
@@ -30,8 +29,9 @@ function SideMenu() {
           <button className="menuItem"><img src={host} alt="Host" className="img-sidemenu" />Host</button>
         </Link>
         <div className="bottom">
-          <button className="menuItem">Import</button>
-          <button className="menuItem" onClick={() => fetchAll()}>Export</button>
+          <Link to="/file">
+          <button className="menuItem">Import/Export</button>
+          </Link>
         </div>
       </nav>
     </div>

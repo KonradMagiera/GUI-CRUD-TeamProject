@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { login } from '../../actions/authentication'
 
 function Home() {
   document.body.style.cursor='default'
@@ -12,8 +10,5 @@ function Home() {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  logout: isAuth => dispatch(login(isAuth))
-})
 
-export default connect(null, mapDispatchToProps)(Home)
+export default Home
