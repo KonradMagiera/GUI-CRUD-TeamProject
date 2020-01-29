@@ -77,6 +77,39 @@ background-color: #333333;
   bottom: 5px
 }
 
+.align-right {
+  position: absolute;
+  right: 10px;
+}
+
+.switch {
+  color: white;
+  background: #2c8cff;
+  border: 0;
+  outline: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px 3px 5px 3px;
+  display: inline-block;  
+  font-size: 14px;
+  font-weight: bold;
+}
+.switch:hover {
+  background: #4dbbee;
+}
+
+.switch:active {
+  background: rgb(2, 136, 199);
+}
+
+.switch:disabled {
+  background: #677280;
+  cursor: default;
+}
+
+
+
 .img-sidemenu {
   position: absolute;
   height: 25px;

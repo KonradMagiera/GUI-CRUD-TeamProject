@@ -46,10 +46,12 @@ class Table extends React.Component {
             {limitedItems}
           </tbody>
         </table>
-        {this.state.currentPage === 1 ? null : <button onClick={() => this.setPage(this.state.currentPage - 1)}>Prev</button>}
+        <div className="align-right">
+        <button className="switch" onClick={() => this.setPage(this.state.currentPage - 1)} disabled={this.state.currentPage === 1}>Prev</button>
         <label>Current page: {this.state.currentPage}</label>
-        {this.state.currentPage === pageCount ? null : <button onClick={() => this.setPage(this.state.currentPage + 1)}>Next</button>}
-      </div>
+        <button className="switch" onClick={() => this.setPage(this.state.currentPage + 1)} disabled={this.state.currentPage === pageCount}>Next</button>
+        </div>
+  </div>
     )
   }
 }
