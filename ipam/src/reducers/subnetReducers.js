@@ -1,11 +1,12 @@
-import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO, DELETE_SUBNET_INFO } from "../actions/subnet"
+import { SET_SUBNET_ITEM, RESET_SUBNET, SET_SUBNET, ADD_SUBNET_INFO, DELETE_SUBNET_INFO, ADD_SUBNET_VLAN } from "../actions/subnet"
 
 
 const initialSubnet = {
     subnet_key: "",
     ip_address: "",
     netmask: "",
-    vlan: "",
+    //vlan: "",
+    vlan: {},
     nameservers: "",
     location: "",
     routable: false,
@@ -14,7 +15,7 @@ const initialSubnet = {
     description: ""
   }
   
-  export function subnetReducer(state = initialSubnet, { type, name, value, subnet }) {
+  export function subnetReducer(state = initialSubnet, { type, name, value, subnet, vlan_key, id_vlan }) {
     Object.freeze(state)
     switch (type) {
       case SET_SUBNET:
@@ -23,6 +24,13 @@ const initialSubnet = {
         return ({
           ...state,
           [name]: value})
+      case ADD_SUBNET_VLAN:
+        return ({
+          ...state,
+          vlan: {
+            [vlan_key]: id_vlan
+          }
+        })
       case RESET_SUBNET:
         return initialSubnet
       default:

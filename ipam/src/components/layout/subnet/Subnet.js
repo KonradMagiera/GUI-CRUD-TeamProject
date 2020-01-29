@@ -17,6 +17,12 @@ class Subnet extends React.Component {
     var subnetItems = null
     if (this.props.allSubnets !== null) {
       subnetItems = Object.keys(this.props.allSubnets).map(key => {
+        var subnetVlans = null;
+        if (this.props.allSubnets[key].vlan !== undefined) {
+          subnetVlans = Object.keys(this.props.allSubnets[key].vlan).map(vlanKey => {
+            return (<div key={vlanKey}>{this.props.allSubnets[key].vlan[vlanKey]}</div>)
+          })
+        }
         return (
           <tr key={key}>
             <th><div>{this.props.allSubnets[key].ip_address}</div></th>
@@ -26,7 +32,7 @@ class Subnet extends React.Component {
             <th><div>{this.props.allSubnets[key].location}</div></th>
             <th><div>{this.props.allSubnets[key].nameservers}</div></th>
             <th><div>{this.props.allSubnets[key].public_or_dmz}</div></th>
-            <th><div>{this.props.allSubnets[key].vlan}</div></th>
+            <th><div>{subnetVlans}</div></th>
             <th><div>{this.props.allSubnets[key].description}</div></th>
             <th><Link to="/edit_subnet" onClick={() => {
               this.props.setSubnet({

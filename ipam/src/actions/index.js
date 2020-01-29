@@ -1,5 +1,5 @@
 import { login } from "./authentication"
-import { setSubnetItem, resetSubnet, setSubnet, addSubnetInfo, deleteSubnetInfo } from "./subnet"
+import { setSubnetItem, resetSubnet, setSubnet, addSubnetInfo, deleteSubnetInfo, addSubnetVlan } from "./subnet"
 import { setVlanItem, resetVlan, setVlan, addVlanInfo, deleteVlanInfo, addVlanSubnet } from "./vlan"
 import { setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo } from './location'
 import { fetchItems, deleteItem, addItem, updateItem } from './firebase'
@@ -8,7 +8,7 @@ import { setHostItem, resetHost, setHost, addHostInfo, deleteHostInfo } from "./
 
 export {
     login,
-    setSubnetItem, resetSubnet, setSubnet, addSubnetInfo, deleteSubnetInfo,
+    setSubnetItem, resetSubnet, setSubnet, addSubnetInfo, deleteSubnetInfo, addSubnetVlan,
     setVlanItem, resetVlan, setVlan, addVlanInfo, deleteVlanInfo, addVlanSubnet,
     setLocation, setLocationItem, resetLocation, deleteLocationInfo, addLocationInfo,
     fetchItems, deleteItem, addItem, updateItem,

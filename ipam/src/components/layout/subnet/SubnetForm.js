@@ -1,9 +1,13 @@
 import React from 'react';
-import { setSubnetItem, resetSubnet, addItem, updateItem } from '../../../actions'
+import { setSubnetItem, resetSubnet, addSubnetVlan, addItem, updateItem, fetchItems } from '../../../actions'
+import { addVlanInfo, resetVlan } from '../../../actions'
 import { connect } from 'react-redux'
 import { validateIPaddress, validateNetmask } from '../../../utils/validation'
 
 class SubnetForm extends React.Component {
+  componentDidMount() {
+    fetchItems("vlans", this.props.addVlanInfo)
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -28,6 +32,14 @@ class SubnetForm extends React.Component {
   }
 
   handleChange = e => {
+    if (e.target.name === "vlans") {
+      if (e.target.value !== "") {
+        var vlan_key = e.target.value
+        var id_vlan = this.props.allVlans[vlan_key].id_vlan
+        this.props.addSubnetVlan(vlan_key, id_vlan)
+      }
+    }
+
     const { name, value, type, checked } = e.target
     type === "checkbox"
       ? this.props.setSubnetItem(name, checked)
@@ -54,6 +66,19 @@ class SubnetForm extends React.Component {
   }
 
   render() {
+    this.props.resetVlan()
+    var vlanItems = null
+    if (this.props.allVlans !== null) {
+      vlanItems = Object.keys(this.props.allVlans).map(key => {
+        return (
+          <option value={key} key={key}>
+            {this.props.allVlans[key].id_vlan}
+          </option>
+        )
+      })
+    }
+    //<input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="VLAN" onChange={e => this.handleChange(e)} />
+
     return (
       <form onSubmit={(e) => this.handleSubmit(e)} className="right">
         <div className="register-box">
@@ -63,7 +88,10 @@ class SubnetForm extends React.Component {
           <label htmlFor="netmask">Netmask</label>
           <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
-          <input type="text" name="vlan" value={this.props.subnet.vlan} placeholder="VLAN" onChange={e => this.handleChange(e)} />
+          <select name="vlans" onChange={e => this.handleChange(e)}>
+            <option value="">--VLAN--</option>
+            {vlanItems}
+          </select>
           <label htmlFor="nameservers">Nameservers</label>
           <input type="text" name="nameservers" value={this.props.subnet.nameservers} placeholder="Nameservers" onChange={e => this.handleChange(e)} />
           <label htmlFor="location">Location</label>
@@ -100,8 +128,9 @@ class SubnetForm extends React.Component {
 }
 
 
-const mapStateToProps = ({ subnetReducer }) => ({
-  subnet: subnetReducer
+const mapStateToProps = ({ subnetReducer, allVlansReducer }) => ({
+  subnet: subnetReducer,
+  allVlans: allVlansReducer
 })
 
-export default connect(mapStateToProps, { setSubnetItem, resetSubnet })(SubnetForm)
+export default connect(mapStateToProps, { setSubnetItem, resetSubnet, addVlanInfo, resetVlan, addSubnetVlan })(SubnetForm)
