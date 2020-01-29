@@ -1,11 +1,12 @@
 import React from 'react';
-import { setNatItem, resetNat, addNatDevice, addItem, fetchItems, updateItem } from '../../../actions'
+import { setNatItem, resetNat, addNatDevice, addItem, fetchItems, updateItem, deleteNatDevice } from '../../../actions'
 import { addHostInfo, resetHost } from '../../../actions'
 import { connect } from 'react-redux'
 
 class NatForm extends React.Component {
   componentDidMount() {
     fetchItems("hosts", this.props.addHostInfo)
+    this.setValue()
   }
 
   handleSubmit(e) {
@@ -26,10 +27,6 @@ class NatForm extends React.Component {
     this.props.history.push("/nat"); // redirect after success
   }
 
-  handleChange = e => {
-    const { name, value } = e.target
-    this.props.setNatItem(name, value)
-  }
 
   cancelOperation = () => {
     this.props.history.push("/nat");
@@ -41,6 +38,8 @@ class NatForm extends React.Component {
         var host_key = e.target.value
         var host_name = this.props.allHosts[host_key].hostname
         this.props.addNatDevice(host_key, host_name)
+      } else {
+        this.props.deleteNatDevice()
       }
     } else {
       const { name, value } = e.target
@@ -48,7 +47,14 @@ class NatForm extends React.Component {
     }
   }
 
-  //<input type="text" name="device" value={this.props.nat.device} placeholder="Device" onChange={e => this.handleChange(e)} />
+  setValue = () => {
+    if(this.props.nat.device){
+      const key = Object.keys(this.props.nat.device)
+      var x = document.getElementsByName("devices")
+      x = x[0]
+      x.value = key[0]
+    }
+  }
 
   render() {
     this.props.resetHost()
@@ -96,4 +102,4 @@ const mapStateToProps = ({ natReducer, allHostsReducer }) => ({
   allHosts: allHostsReducer
 })
 
-export default connect(mapStateToProps, { setNatItem, resetNat, resetHost, addHostInfo, addNatDevice })(NatForm)
+export default connect(mapStateToProps, { setNatItem, resetNat, resetHost, addHostInfo, addNatDevice, deleteNatDevice })(NatForm)

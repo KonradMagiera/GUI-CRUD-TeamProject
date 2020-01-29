@@ -4,7 +4,7 @@ export const RESET_NAT = "RESET_NAT"
 export const ADD_NAT_INFO = "ADD_NAT_INFO"
 export const DELETE_NAT_INFO = "DELETE_NAT_INFO"
 export const ADD_NAT_DEVICE = "ADD_NAT_DEVICE"
-
+export const DELETE_NAT_DEVICE = "DELETE_NAT_DEVICE"
 
 export const setNat = nat => dispatch => {
     dispatch({
@@ -47,5 +47,11 @@ export const addNatDevice = (device_key, device_name) => dispatch => {
         type: ADD_NAT_DEVICE,
         device_key,
         device_name
+    })
+}
+
+export const deleteNatDevice = () => dispatch => {
+    dispatch({
+        type: DELETE_NAT_DEVICE
     })
 }

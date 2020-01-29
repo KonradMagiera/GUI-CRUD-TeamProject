@@ -1,11 +1,12 @@
 import React from 'react';
-import { setVlanItem, resetVlan, addVlanSubnet, fetchItems, addItem, updateItem } from '../../../actions'
+import { setVlanItem, resetVlan, addVlanSubnet, fetchItems, addItem, updateItem, deleteVlanSubnet } from '../../../actions'
 import { addSubnetInfo, resetSubnet } from '../../../actions'
 import { connect } from 'react-redux'
 
 class VlanForm extends React.Component {
   componentDidMount() {
     fetchItems("subnets", this.props.addSubnetInfo)
+    this.setValue()
   }
 
   handleSubmit(e) {
@@ -30,6 +31,8 @@ class VlanForm extends React.Component {
         var subnet_key = e.target.value
         var subnet_ip_address = this.props.allSubnets[subnet_key].ip_address
         this.props.addVlanSubnet(subnet_key, subnet_ip_address)
+      } else {
+        this.props.deleteVlanSubnet()
       }
     } else {
       const { name, value } = e.target
@@ -41,7 +44,16 @@ class VlanForm extends React.Component {
     this.props.history.push("/vlan");
   }
 
-  render() {  // Subnets musza być chyba wybierane z tych zarejestrowanych    
+  setValue = () => {
+    if(this.props.vlan.subnet){
+      const key = Object.keys(this.props.vlan.subnet)
+      var x = document.getElementsByName("subnets")
+      x = x[0]
+      x.value = key[0]
+    }
+  }
+
+  render() {   
     this.props.resetSubnet()
     var subnetItems = null
     if (this.props.allSubnets !== null) {
@@ -82,4 +94,4 @@ const mapStateToProps = ({ vlanReducer, allSubnetsReducer }) => ({
   allSubnets: allSubnetsReducer
 })
 
-export default connect(mapStateToProps, { setVlanItem, resetVlan, addSubnetInfo, resetSubnet, addVlanSubnet })(VlanForm)
+export default connect(mapStateToProps, { setVlanItem, resetVlan, addSubnetInfo, resetSubnet, addVlanSubnet, deleteVlanSubnet })(VlanForm)

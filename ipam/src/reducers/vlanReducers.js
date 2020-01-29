@@ -1,11 +1,10 @@
-import { ADD_VLAN_INFO, RESET_VLAN, SET_VLAN, DELETE_VLAN_INFO, SET_VLAN_ITEM, ADD_VLAN_SUBNET } from "../actions/vlan"
+import { ADD_VLAN_INFO, RESET_VLAN, SET_VLAN, DELETE_VLAN_INFO, SET_VLAN_ITEM, ADD_VLAN_SUBNET, DELETE_VLAN_SUBNET } from "../actions/vlan"
 
 const initialVlan = {
     vlan_key: "",
     id_vlan: "",
     description: "",
     vlan: "",
-    //subnets: {} to bedzie chyba jakos inaczej
     subnet: {}
   }
   
@@ -15,19 +14,16 @@ const initialVlan = {
       case SET_VLAN:
         return vlan
       case ADD_VLAN_SUBNET:
-        /*var prevSubnets = state["subnets"]
-        return ({
-          ...state,
-          subnets: {
-            ...prevSubnets,
-            [subnet_key]: subnet_ip_address
-          }
-        })*/
         return ({
           ...state,
           subnet: {
             [subnet_key]: subnet_ip_address
           }
+        })
+      case DELETE_VLAN_SUBNET:
+        return ({
+          ...state,
+          subnet: {}
         })
       case SET_VLAN_ITEM:
         return ({
@@ -43,7 +39,6 @@ const initialVlan = {
   const initialAllVlans = null
   
   export function allVlansReducer(state = initialAllVlans, {type, vlanKey, vlanInfo}) {
-    //Object.freeze(state)
     switch(type) {
       case DELETE_VLAN_INFO:
         var newState = state

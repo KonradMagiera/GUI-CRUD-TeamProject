@@ -4,6 +4,8 @@ export const RESET_VLAN = "RESET_VLAN"
 export const ADD_VLAN_INFO = "ADD_VLAN_INFO"
 export const DELETE_VLAN_INFO = "DELETE_VLAN_INFO"
 export const ADD_VLAN_SUBNET = "ADD_VLAN_SUBNET"
+export const DELETE_VLAN_SUBNET = "DELETE_VLAN_SUBNET"
+
 
 export const setVlan = vlan => dispatch => {
     dispatch({
@@ -46,5 +48,11 @@ export const addVlanSubnet = (subnet_key, subnet_ip_address) => dispatch => {
         type: ADD_VLAN_SUBNET,
         subnet_key,
         subnet_ip_address
+    })
+}
+
+export const deleteVlanSubnet = () => dispatch => {
+    dispatch({
+        type: DELETE_VLAN_SUBNET
     })
 }
