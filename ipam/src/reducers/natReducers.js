@@ -41,7 +41,6 @@ export function natReducer(state = initialNat, { type, name, value, nat, device_
 const initialAllNats = null
 
 export function allNatsReducer(state = initialAllNats, { type, natKey, natInfo }) {
-  //Object.freeze(state)
   switch (type) {
     case DELETE_NAT_INFO:
       var newState = state

@@ -32,7 +32,6 @@ const initialHost = {
   const initialAllHosts = null
   
   export function allHostsReducer(state = initialAllHosts, {type, hostKey, hostInfo}) {
-    //Object.freeze(state)
     switch(type) {
       case DELETE_HOST_INFO:
         var newState = state

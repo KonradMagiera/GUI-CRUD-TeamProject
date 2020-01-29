@@ -5,7 +5,6 @@ const initialSubnet = {
     subnet_key: "",
     ip_address: "",
     netmask: "",
-    //vlan: "",
     vlan: {},
     nameservers: "",
     location: "",
@@ -46,7 +45,6 @@ const initialSubnet = {
   const initialAllSubnets = null
   
   export function allSubnetsReducer(state = initialAllSubnets, {type, subnetKey, subnetInfo}) {
-    //Object.freeze(state)
     switch(type) {
       case DELETE_SUBNET_INFO:
         var newState = state

@@ -22,7 +22,7 @@ class VlanForm extends React.Component {
       updateItem("vlans", this.props.vlan.vlan_key, vlanTmp)
     }
     this.props.resetVlan()
-    this.props.history.push("/vlan"); // redirect after success
+    this.props.history.push("/vlan");
   }
 
   handleChange = e => {

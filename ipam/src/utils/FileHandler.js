@@ -28,24 +28,3 @@ export const selectFile = () => {
     }
   }
 }
-
-
-/*class FileHandler extends React.Component {
-  componentDidMount() {
-    document.body.style.cursor = 'default'
-    fetchAll()
-  }
-
-  render() {
-    return (
-      <div className="right middle"> 
-        <button className="menuItem" style={{ width: "25%" }} onClick={() => {document.getElementById('file-input').click()}}>Import</button>
-        <input id="file-input" type="file" name="name" style={{display: "none"}} onChange={() => {this.selectFile()}} ></input>
-        <button className="menuItem" style={{ width: "25%" }} onClick={() => { exportDB(this.download) }}>Export</button>
-      </div>
-    )
-  }
-}
-
-
-export default FileHandler*/

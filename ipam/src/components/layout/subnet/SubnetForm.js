@@ -12,24 +12,38 @@ class SubnetForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var subnetTmp = {
-      "ip_address": this.props.subnet.ip_address === "" ? "127.0.0.1" : this.props.subnet.ip_address,
-      "netmask": this.props.subnet.netmask === "" ? "255.255.0.0" : this.props.subnet.netmask,
-      "vlan": this.props.subnet.vlan,
-      "nameservers": this.props.subnet.nameservers,
-      "location": this.props.subnet.location,
-      "is_routable": this.props.subnet.routable,
-      "public_or_dmz": this.props.subnet.public_or_dmz,
-      "ip_assignment": this.props.subnet.ip_assignment,
-      "description": this.props.subnet.description
-    }
-    if (this.props.subnet.subnet_key === "") {
-      addItem("subnets", subnetTmp)
+
+    if(validateIPaddress(this.props.subnet.ip_address) && validateNetmask(this.props.subnet.netmask)) {
+
+      var subnetTmp = {
+        "ip_address": this.props.subnet.ip_address === "" ? "127.0.0.1" : this.props.subnet.ip_address,
+        "netmask": this.props.subnet.netmask === "" ? "255.255.0.0" : this.props.subnet.netmask,
+        "vlan": this.props.subnet.vlan,
+        "nameservers": this.props.subnet.nameservers,
+        "location": this.props.subnet.location,
+        "is_routable": this.props.subnet.routable,
+        "public_or_dmz": this.props.subnet.public_or_dmz,
+        "ip_assignment": this.props.subnet.ip_assignment,
+        "description": this.props.subnet.description
+      }
+      if (this.props.subnet.subnet_key === "") {
+        addItem("subnets", subnetTmp)
+      } else {
+        updateItem("subnets", this.props.subnet.subnet_key, subnetTmp)
+      }
+      this.props.resetSubnet()
+      this.props.history.push("/subnet");
     } else {
-      updateItem("subnets", this.props.subnet.subnet_key, subnetTmp)
+      if(!validateIPaddress(this.props.subnet.ip_address)) {
+        var wrongField = document.getElementById("ip_address")
+        wrongField.style.borderColor = "red"
+      }
+
+      if(!validateNetmask(this.props.subnet.netmask)) {
+        var wrongField = document.getElementById("netmask")
+        wrongField.style.borderColor = "red"
+      }
     }
-    this.props.resetSubnet()
-    this.props.history.push("/subnet");
   }
 
   handleChange = e => {
@@ -95,9 +109,9 @@ class SubnetForm extends React.Component {
         <div className="register-box">
           <h2>{this.props.subnet.subnet_key === "" ? "Register subnet" : "Edit subnet"}</h2>
           <label htmlFor="ip_address">IP address</label>
-          <input type="text" name="ip_address" value={this.props.subnet.ip_address} placeholder="127.0.0.1" onChange={e => this.handleChange(e)} />
+          <input type="text" id="ip_address" name="ip_address" value={this.props.subnet.ip_address} placeholder="127.0.0.1" onChange={e => this.handleChange(e)} />
           <label htmlFor="netmask">Netmask</label>
-          <input type="text" name="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
+          <input type="text" name="netmask" id="netmask" value={this.props.subnet.netmask} placeholder="255.255.0.0" onChange={e => this.handleChange(e)} />
           <label htmlFor="vlan">VLAN</label>
           <select name="vlans" onChange={e => this.handleChange(e)}>
             <option value="">--VLAN--</option>

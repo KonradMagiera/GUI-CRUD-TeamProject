@@ -13,3 +13,10 @@ export function validateNetmask(netmask) {
   }
   return false
 }
+
+export function validateMACAddress(mac) {
+  if(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/.test(mac)) {
+    return true
+  }
+  return false
+}
