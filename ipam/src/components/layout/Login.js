@@ -15,9 +15,23 @@ class Login extends React.Component {
     const password = e.target.password.value
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.login(true))
+      .then(() => {
+        var x = document.getElementsByName("email")
+        x = x[0]
+        x.style.border = "1px solid black"
+        x = document.getElementsByName("password")
+        x = x[0]
+        x.style.border = "1px solid black"
+        this.props.login(true)
+      })
       .catch(() => {
         this.props.login(false);
+        var x = document.getElementsByName("email")
+        x = x[0]
+        x.style.border = "3px solid red"
+        x = document.getElementsByName("password")
+        x = x[0]
+        x.style.border = "3px solid red"
         document.body.style.cursor = "default"
       })
   }
