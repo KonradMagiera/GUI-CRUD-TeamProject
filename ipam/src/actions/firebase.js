@@ -56,3 +56,7 @@ export const exportDB = (download) => {
     download("ipam.json", JSON.stringify(ipam.val()))
   })
 }
+
+export const importDB = (data) => {
+  Firebase.database().ref('/').set(data)
+}
