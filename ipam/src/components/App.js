@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login, Home, SubnetForm, PrivateRoute, Header, Subnet, Vlan, VlanForm, Location, LocationForm, Nat, NatForm, SideMenu, Host, HostForm, FileHandler } from "./index"
+import { Login, Home, SubnetForm, PrivateRoute, Header, Subnet, Vlan, VlanForm, Location, LocationForm, Nat, NatForm, SideMenu, Host, HostForm } from "./index"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
@@ -29,7 +29,6 @@ function App() {
         <PrivateRoute path="/edit_vlan" component={VlanForm} />
         <PrivateRoute path="/edit_nat" component={NatForm} />
         <PrivateRoute path="/edit_host" component={HostForm} />
-        <PrivateRoute path="/file" component={FileHandler} />
       </Switch>
 
     </Router>

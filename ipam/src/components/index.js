@@ -13,7 +13,6 @@ import Nat from "./layout/nat/Nat"
 import NatForm from "./layout/nat/NatForm"
 import Host from "./layout/host/Host"
 import HostForm from "./layout/host/HostForm"
-import FileHandler from "./layout/FileHandler"
 import SideMenu from './layout/SideMenu'
 
-export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table, Nat, NatForm, SideMenu, Host, HostForm, FileHandler }
+export { Login, Home, Header, SubnetForm, Subnet, Vlan, VlanForm, PrivateRoute, Location, LocationForm, Table, Nat, NatForm, SideMenu, Host, HostForm }

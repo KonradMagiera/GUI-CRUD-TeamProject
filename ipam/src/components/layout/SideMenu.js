@@ -4,6 +4,8 @@ import subnet from '../../static/subnet.png'
 import vlan from '../../static/vlan.png'
 import location from '../../static/location.png'
 import host from '../../static/host.png'
+import {download, selectFile} from '../../utils/FileHandler'
+import { exportDB } from '../../actions/index'
 
 function SideMenu() {
   return (
@@ -28,10 +30,10 @@ function SideMenu() {
         <Link to="/host">
           <button className="menuItem"><img src={host} alt="Host" className="img-sidemenu" />Host</button>
         </Link>
-        <div className="bottom">
-          <Link to="/file">
-          <button className="menuItem">Import/Export</button>
-          </Link>
+        <div className="bottom">  
+          <button className="menuItem" onClick={() => { exportDB(download) }}>Export</button>
+          <button className="menuItem" onClick={() => { document.getElementById('file-input').click() }}>Import</button>
+          <input id="file-input" type="file" name="name" style={{display: "none"}} onChange={() => {selectFile()}} ></input>
         </div>
       </nav>
     </div>
