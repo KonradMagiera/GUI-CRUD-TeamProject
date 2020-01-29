@@ -50,3 +50,9 @@ export const updateItem = (dbRef, key, item) => {
       }
     })
 }
+
+export const exportDB = (download) => {
+  Firebase.database().ref('/').once('value', (ipam) => {
+    download("ipam.json", JSON.stringify(ipam.val()))
+  })
+}
