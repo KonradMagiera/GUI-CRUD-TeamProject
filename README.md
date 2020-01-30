@@ -5,7 +5,8 @@ src/firebaseConfig.js and fill "" with your firebase database config
 
 
 
-```import firebase from "firebase"
+```
+import firebase from "firebase"
 
 const firebaseConfig = {
   apiKey: "",
