@@ -1,5 +1,4 @@
 import Firebase from '../firebaseConfig'
-import { addHostInfo, addLocationInfo, addNatInfo, addSubnetInfo, addVlanInfo } from './index'
 
 export const fetchItems = (dbRef, fun) => {
   Firebase.database().ref(`/${dbRef}`).once("value", data => {
@@ -14,16 +13,6 @@ export const fetchItems = (dbRef, fun) => {
       return items
     }
   })
-}
-
-export const fetchAll = () => {
-  const references = ["hosts", "locations", "nats", "subnets", "vlans"]
-  const methods = [addHostInfo, addLocationInfo, addNatInfo, addSubnetInfo, addVlanInfo]
-  for(var i = 0; i < methods.length; i++){
-    console.log(references[i], methods[i])
-    fetchItems(references[i], methods[i])
-  }
-  
 }
 
 
